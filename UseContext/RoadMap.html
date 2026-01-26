@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>useContext – Structured Notes</title>
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f5f7fa;
+      padding: 20px;
+      line-height: 1.7;
+      color: #222;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: auto;
+      background: #ffffff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+
+    h2 {
+      border-left: 6px solid #3498db;
+      padding-left: 10px;
+      margin-top: 35px;
+      color: #2c3e50;
+    }
+
+    h3 {
+      margin-top: 25px;
+      color: #34495e;
+    }
+
+    .box {
+      background: #eef6ff;
+      border-left: 6px solid #2980b9;
+      padding: 15px;
+      margin: 20px 0;
+      font-weight: bold;
+    }
+
+    .note {
+      background: #fff6e5;
+      border-left: 6px solid #f39c12;
+      padding: 15px;
+      margin: 20px 0;
+    }
+
+    .wrong {
+      background: #ffecec;
+      border-left: 6px solid #e74c3c;
+      padding: 15px;
+      margin: 20px 0;
+    }
+
+    .right {
+      background: #eaffea;
+      border-left: 6px solid #27ae60;
+      padding: 15px;
+      margin: 20px 0;
+    }
+
+    ul, ol {
+      margin-left: 25px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+    }
+
+    table th, table td {
+      border: 1px solid #ccc;
+      padding: 10px;
+      text-align: left;
+    }
+
+    table th {
+      background: #f0f3f6;
+    }
+
+    .line {
+      background: #2c3e50;
+      color: #fff;
+      padding: 15px;
+      border-radius: 8px;
+      margin: 25px 0;
+      text-align: center;
+      font-weight: bold;
+    }
+
+    .divider {
+      margin: 35px 0;
+      border-top: 2px dashed #ccc;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <h2>1️.Problem introduce pannu</h2>
+    <div class="box">
+      Parent → Child → SubChild → DeepChild
+    </div>
+
+    <h2>2.useContext yen thevai?</h2>
+    <ul>
+      <li>*Same data</li>
+      <li>*Many components use pannum</li>
+      <li>*Props drilling avoid pannanum</li>
+    </ul>
+
+    <h2>3.Context API overview;</h2>
+    <ol>
+      <li>createContext</li>
+      <li>Provider</li>
+      <li>Consumer (useContext)</li>
+    </ol>
+    <p>Provider illama useContext work aagathu ❌</p>
+
+    <h2>4.Example scenario;</h2>
+    <p>“Login panna user name ellaa page-layum thevai”</p>
+
+    <div class="wrong">
+      ❌ Props drilling panna: App → Navbar → Profile
+    </div>
+
+    <div class="right">
+      ✅ useContext panna: Direct-aa use pannalaam
+    </div>
+
+    <h2>5..Key rules &amp; points</h2>
+    <div class="note">
+      🔑 Rules:
+      <ul>
+        <li>1.useContext is a hook 👉 Only function component-la use pannalaam</li>
+        <li>2.Provider must wrap parent component</li>
+        <li>3.Context value change aana 👉 All consuming components re-render aagum</li>
+      </ul>
+    </div>
+
+    <h2>6.Interview questions ;</h2>
+    <p>Ask students 👇</p>
+    <ol>
+      <li>What problem does useContext solve?</li>
+      <li>What are the parts of Context API?</li>
+      <li>Provider illaama useContext use panna mudiyuma?</li>
+      <li>Props vs Context?</li>
+    </ol>
+
+    <div class="divider"></div>
+
+    <h2>1.useContext – CODE FLOW</h2>
+    <ul>
+      <li>*createContext la context create pannom</li>
+      <li>*Provider la data supply pannom</li>
+      <li>*useContext la data receive pannom</li>
+    </ul>
+
+    <h2>2.STEP 2: Provider use pannuradhu (DATA SUPPLY)</h2>
+    <ul>
+      <li>*Provider → data supply pannum</li>
+      <li>*value prop-la data pass pannrom</li>
+      <li>*Navbar + inside irukka ellaa components-kum access irukkum</li>
+    </ul>
+    <p>=&gt;Provider illaama useContext work aagathu ❌</p>
+
+    <h2>3.STEP 1: Context create pannuradhu</h2>
+    <ul>
+      <li>*Idhu data store maadhiri</li>
+    </ul>
+
+    <div class="divider"></div>
+
+    <div class="box">
+      ❓ Student Question:<br>
+      “Sir, idhu function component-aa? class component-aa?”
+    </div>
+    <p>
+      Idhu rendume illa.<br>
+      Idhu oru Context Object.<br>
+      Context is a data container.
+    </p>
+
+    <div class="divider"></div>
+
+    <div class="box">
+      ❓ Student Question:<br>
+      “Sir, createContext-ah component kulla podalaama?<br>
+      Yen idha maadhiri podala?”
+    </div>
+
+    <div class="divider"></div>
+
+    <h2>4.</h2>
+    <h3>1️.Context enna?</h3>
+    <p>Context is a GLOBAL DATA CONTAINER</p>
+
+    <table>
+      <tr>
+        <th>Real life</th>
+        <th>React</th>
+      </tr>
+      <tr>
+        <td>Notice Board</td>
+        <td>Context</td>
+      </tr>
+      <tr>
+        <td>Student</td>
+        <td>Component</td>
+      </tr>
+      <tr>
+        <td>Message</td>
+        <td>Data</td>
+      </tr>
+    </table>
+
+    <h3>2.“Once create aaganum</h3>
+    <h3>3.“Re-render aagakoodaadhu”</h3>
+    <ul>
+      <li>*Component = function → run again &amp; again</li>
+      <li>*Context = container → stable-aa irukkanum</li>
+    </ul>
+
+    <div class="divider"></div>
+
+    <h2>5.Component enna?</h2>
+    <ul>
+      <li>State change aana</li>
+      <li>Props change aana</li>
+    </ul>
+
+    <div class="line">
+      “Context = data container<br>
+      Component = UI renderer<br>
+      Rendume same illa.”
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="box">
+      6.❓ Student Question:<br>
+      “Sir, wrapper naa enna?”<br>
+      “Provider oru wrapper component,
+    </div>
+
+    <table>
+      <tr>
+        <th>Real life</th>
+        <th>React</th>
+      </tr>
+      <tr>
+        <td>Gift</td>
+        <td>Component</td>
+      </tr>
+      <tr>
+        <td>Gift paper</td>
+        <td>Wrapper</td>
+      </tr>
+      <tr>
+        <td>Information on paper</td>
+        <td>Context data</td>
+      </tr>
+    </table>
+
+    <div class="divider"></div>
+
+    <div class="box">
+      7.❓ Student Question (simplified):<br>
+      “File name UserContext.jsx nu create panninom.<br>
+      Appo indha UserContext name-um same-aa dhaan irukkanuma?”
+    </div>
+
+    <p>🏠 Real-life analogy (students love this)</p>
+    <p>
+      👨 Person name: Rocky<br>
+      📄 File name: resume.pdf
+    </p>
+    <p>
+      👉 Resume name vera<br>
+      👉 Person name vera<br>
+      👉 Same irundhaa easy
+    </p>
+
+    <div class="divider"></div>
+
+    <h2>🔹 STEP 3: useContext use pannuradhu (DATA RECEIVE)</h2>
+    <p>Explain:</p>
+    <ul>
+      <li>*useContext(UserContext) → data edukkum</li>
+      <li>*Props use pannala</li>
+      <li>*Direct access ✅</li>
+    </ul>
+
+  </div>
+</body>
+</html>

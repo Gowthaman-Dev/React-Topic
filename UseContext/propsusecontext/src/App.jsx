@@ -1,15 +1,11 @@
-import NavBar from "./Components/NavBar"
-import UserContext from "./ConText/UserContext"
+import UserContext from './ConText/UserContext'
+import NavBar from './Components/NavBar'
 
 const App = () => {
-  const userName = {
-    name:"Rocky Gowtham",
-    age:"21",
-    course:"Mern Stack Development"
-  }
+  const username = 'Rocky'
   return (
     <>
-    <UserContext.Provider value={userName}>
+    <UserContext.Provider value={username}>
       <NavBar/>
     </UserContext.Provider>
     </>

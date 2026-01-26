@@ -1,261 +1,123 @@
+1️.Problem introduce pannu
+Parent → Child → SubChild → DeepChild
+
+2.useContext yen thevai?
+*Same data
+*Many components use pannum
+*Props drilling avoid pannanum
+
+3.Context API overview;
+1. createContext
+2. Provider
+3. Consumer (useContext)
+Provider illama useContext work aagathu ❌
+
+
+4.Example scenario;
+“Login panna user name ellaa page-layum thevai”
+❌ Props drilling panna: App → Navbar → Profile
+✅ useContext panna: Direct-aa use pannalaam
+
+5..Key rules & points
+🔑 Rules:
+1.useContext is a hook 👉 Only function component-la use pannalaam
+2.Provider must wrap parent component
+3.Context value change aana 👉 All consuming components re-render aagum
+
+
+6.Interview questions ;
+Ask students 👇
+
+1.What problem does useContext solve?
+2.What are the parts of Context API?
+3.Provider illaama useContext use panna mudiyuma?
+4.Props vs Context?
+
+
+--------------------------------------------
+1.useContext – CODE FLOW
+*createContext la context create pannom
+*Provider la data supply pannom
+*useContext la data receive pannom
+
+
+2.STEP 2: Provider use pannuradhu (DATA SUPPLY)
+*Provider → data supply pannum
+*value prop-la data pass pannrom
+*Navbar + inside irukka ellaa components-kum access irukkum
+
+=>Provider illaama useContext work aagathu ❌
+
+
+3.STEP 1: Context create pannuradhu
+
+*Idhu data store maadhiri
+------------------------------------
+❓ Student Question:
+“Sir, idhu function component-aa? class component-aa?”
+Idhu rendume illa.
+Idhu oru Context Object.
+Context is a data container.
+
+-----------------------------------------
 ❓ Student Question:
 
 “Sir, createContext-ah component kulla podalaama?
 Yen idha maadhiri podala?”
 
-(They show this 👇)
-
-const UserContext = () => {
-  const UserContext = createContext();
-
-  return <div></div>
-}
-
-
-❌ CLEAR ANSWER (STRAIGHT & CONFIDENT)
-
-Context oru COMPONENT illa.
-Adha component maadhiri create panna koodaadhu.
-
-------------------------------------------------------
-
-
+------------------------------------------
+4.
 1️.Context enna?
-
 Context is a GLOBAL DATA CONTAINER
+Real life     React
+Notice Board  Context
+Student       Component
+Message       Data
 
-App start aagum bodhu once create aaganum
-
-Re-render aagakoodaadhu
-
-STEP 2: REAL-LIFE ANALOGY (BEST 💯)
-
-| Real life    | React     |
-| ------------ | --------- |
-| Notice Board | Context   |
-| Student      | Component |
-| Message      | Data      |
-
-
-👉 Notice board once dhaan create pannuvaanga
-👉 Adha ellaa students-um use pannuvaanga
-
-🔥 Idhu dhaan GLOBAL DATA CONTAINER
-
-STEP 3: “Once create aaganum”
-
-Say this slowly 👇
-
-“Notice board daily-daily create pannuvaangalaa?” ❌
-“One time create panninaa pothum.” ✅
-
-const UserContext = createContext();
-
-📌 Say:
-
-“Idhu app start aagumbodhu one time create aagudhu.”
-
-STEP 4: “Re-render aagakoodaadhu”
-
-Simple explanation:
-
-Component re-render aagum
-Context re-render aagakoodaadhu
-
-Reason:
-
+2.“Once create aaganum
+3. “Re-render aagakoodaadhu”
 *Component = function → run again & again
 *Context = container → stable-aa irukkanum
 
-📌 Ask students:
-“Data store daily change aana safe-aa?”
+---------------------------------------
 
-Answer:
-❌ No
-
-STEP 5: BLACKBOARD-READY 3 LINE DEFINITION
-
-Context is a global data container
-Used to share common data
-Created once and not re-rendered
-
-
-🔥 ONE POWERFUL LINE (MEMORIZE THIS)
-“Context holds data,
-Components use data.”
-
-
------------------------------------------------------------
-
-2.Component enna?
-
-Component is a FUNCTION that runs again & again
-
+5.Component enna?
 State change aana
-
 Props change aana
-
-Component re-render aagum
-
-📌 So…
-
--------------------------------------------------------------
-…
-
-🚨 BIG PROBLEM WITH THIS CODE
-const UserContext = () => {
-  const UserContext = createContext();
-}
-
-❌ Problem 1:
-
-👉 Every render-ku new context create aagum
-
-📌 Result:
-
-*Provider & Consumer match aagaadhu
-*App break aagum
-
-❌ Problem 2:
-
-👉 Naming clash 😵
-
-const UserContext = () => {
-  const UserContext = createContext();
-}
-
-
-*Same name function & variable ❌
-*Confusion + error
-
-
-❌ Problem 3:
-
-👉 JSX return thevai illa
-
-*Context UI illa
-*<div></div> waste
-
-----------------------------------------------------
-
-✅ CORRECT WAY (WHY THIS IS RIGHT)
-
-import { createContext } from "react";
-
-const UserContext = createContext();
-
-export default UserContext;
-
-
-
-Explain this line:
-
-“Context create pannradhu component-ku velila
-so adhu once only create aagum.”
-
-
-🔥 BEST ONE-LINER (WRITE THIS ON BOARD)
 
 “Context = data container
 Component = UI renderer
 Rendume same illa.”
 
-
-🧠 If student asks:
-“Appo Provider yen component maadhiri irukku?”
-
-👉 Answer:
-“Provider is a wrapper, not a data creator.”
-
----------------------------------------------------------------------------
-
-❓ Student Question:
-
-“Sir, idhu function component-aa? class component-aa?”
-
-const UserContext = createContext();
-
-✅ FIRST & FINAL ANSWER (CONFIDENT)
-
-Idhu rendume illa.
-Idhu oru Context Object.
-
-Appo Context enna?
-
-Explain:
-
-*Idhu function illa ❌
-*Idhu class illa ❌
-*JSX return pannaadhu ❌
-*UI render pannaadhu ❌
-
-📌 So say clearly:
-
-Context is NOT a component.
-Context is a data container.
-
-
------------------------------------------------------------------------------
-
-“Sir, appo Provider yen component maadhiri irukku?”
-“Provider oru wrapper component,
-Context itself component illa.”
-
-❓ Student Question:
-
+--------------------------------------
+6.❓ Student Question:
 “Sir, wrapper naa enna?”
-Wrapper naa vera component-ah surround pannuradhu.
+“Provider oru wrapper component,
 
-
-🧠 STEP 1: REAL-LIFE ANALOGY (BEST 💯)
-
-🎁 Gift box example
-
-Say this 👇
-
-“Gift irukku…
-Adha paper-la suththinaa enna solluvaanga?”
-
-| Real life            | React        |
-| -------------------- | ------------ |
-| Gift                 | Component    |
-| Gift paper           | Wrapper      |
-| Information on paper | Context data |
-
-
-🧠 STEP 2: React-la wrapper epdi irukku?
-<UserContext.Provider>
-  <NavBar />
-</UserContext.Provider>
-
-Ask:
-
-“Inga yaaru yaarai suththi irukku?”
-
-Answer:
-👉 Provider → NavBar-ah wrap pannudhu
-
-So say 👇
-
-Provider is wrapping NavBar.
-So Provider is a wrapper component.
-
-----------------------------------------------------
-
-“Appo Provider UI render pannumaa?”
-
-Answer 👇
-“Illai.
-Provider data supply pannum, UI illa.”
-
-----------------------------------------------------------
-
-❓ Student Question (simplified):
-
+Real life               React
+Gift                    Component
+Gift paper              Wrapper
+Information on paper    Context data
+--------------------------------------------
+7.❓ Student Question (simplified):
 “File name UserContext.jsx nu create panninom.
 Appo indha UserContext name-um same-aa dhaan irukkanuma?”
 
-✅ SHORT ANSWER (CONFIDENT)
+🏠 Real-life analogy (students love this)
 
-File name enna venumnaalum podalaam.
-Aana export panna variable name-um import panna name-um same-aa irukkanum.
+👨 Person name: Rocky
+📄 File name: resume.pdf
+
+👉 Resume name vera
+👉 Person name vera
+👉 Same irundhaa easy
+
+-----------------------------------------
+🔹 STEP 3: useContext use pannuradhu (DATA RECEIVE)
+
+ Explain:
+
+*useContext(UserContext) → data edukkum
+*Props use pannala
+*Direct access ✅
+

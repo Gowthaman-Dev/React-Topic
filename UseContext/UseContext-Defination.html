@@ -1,0 +1,275 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>useContext – Teaching Notes</title>
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f4f6f9;
+      padding: 20px;
+      line-height: 1.7;
+      color: #222;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: auto;
+      background: #ffffff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+
+    h2 {
+      border-left: 6px solid #3498db;
+      padding-left: 10px;
+      margin-top: 40px;
+      color: #2c3e50;
+    }
+
+    h3 {
+      margin-top: 30px;
+      color: #34495e;
+    }
+
+    .question {
+      background: #eef6ff;
+      border-left: 6px solid #2980b9;
+      padding: 15px;
+      margin: 20px 0;
+      font-weight: bold;
+    }
+
+    .concept {
+      background: #fff6e5;
+      border-left: 6px solid #f39c12;
+      padding: 15px;
+      margin: 20px 0;
+    }
+
+    .wrong {
+      background: #ffecec;
+      border-left: 6px solid #e74c3c;
+      padding: 15px;
+      margin: 20px 0;
+    }
+
+    .right {
+      background: #eaffea;
+      border-left: 6px solid #27ae60;
+      padding: 15px;
+      margin: 20px 0;
+    }
+
+    ul {
+      margin-left: 25px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+    }
+
+    table th, table td {
+      border: 1px solid #ccc;
+      padding: 10px;
+      text-align: left;
+    }
+
+    table th {
+      background: #f0f3f6;
+    }
+
+    .flow {
+      background: #f1f1f1;
+      padding: 15px;
+      border-radius: 8px;
+      margin: 20px 0;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    .key {
+      background: #2c3e50;
+      color: #fff;
+      padding: 15px;
+      border-radius: 8px;
+      margin: 25px 0;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <h2>1️.Problem introduce pannu</h2>
+
+    <div class="question">
+      “Props-ah ellaa level-kum anuppinaa enna problem varum?”
+    </div>
+
+    <div class="concept">
+      🧠 Concept:
+      <ul>
+        <li>❌ Props Drilling</li>
+        <li>👉 Parent → Child → SubChild → DeepChild</li>
+      </ul>
+
+      <p>
+        Define pannunga:
+      </p>
+
+      <p>
+        Props drilling means passing props through multiple component levels even when intermediate components don’t need the data.
+      </p>
+    </div>
+
+    <h2>2.useContext yen thevai?</h2>
+
+    <ul>
+      <li>*Same data</li>
+      <li>*Many components use pannum</li>
+      <li>*Props drilling avoid pannanum</li>
+    </ul>
+
+    <p>
+      =>useContext use panninaa data-ah ellaa component-kum direct-aa share pannalaam.
+    </p>
+
+    <h2>3.Context API overview;</h2>
+
+    <ol>
+      <li>createContext</li>
+      <li>Provider</li>
+      <li>Consumer (useContext)</li>
+    </ol>
+
+    <table>
+      <tr>
+        <th>Term</th>
+        <th>Meaning</th>
+      </tr>
+      <tr>
+        <td>createContext</td>
+        <td>Context create pannuradhu</td>
+      </tr>
+      <tr>
+        <td>Provider</td>
+        <td>Data supply pannuradhu</td>
+      </tr>
+      <tr>
+        <td>useContext</td>
+        <td>Data receive pannuradhu</td>
+      </tr>
+    </table>
+
+    <p>
+      Provider illama useContext work aagathu ❌
+    </p>
+
+    <h2>4. 👉 Flow:</h2>
+
+    <div class="flow">
+      Context create<br>
+      ↓<br>
+      Provider wrap<br>
+      ↓<br>
+      useContext consume
+    </div>
+
+    <p>Class-la indha question kekkalaam:</p>
+
+    <ul>
+      <li>“Provider yaaru?”</li>
+      <li>“Consumer yaaru?”</li>
+    </ul>
+
+    <h2>5.Example scenario ;</h2>
+
+    <p>Situation explain pannu:</p>
+
+    <p>
+      “Login panna user name ellaa page-layum thevai”
+    </p>
+
+    <p>Components:</p>
+
+    <ul>
+      <li>App</li>
+      <li>Navbar</li>
+      <li>Profile</li>
+      <li>Dashboard</li>
+    </ul>
+
+    <div class="wrong">
+      ❌ Props drilling panna: App → Navbar → Profile
+    </div>
+
+    <div class="right">
+      ✅ useContext panna: Direct-aa use pannalaam
+    </div>
+
+    <h2>6.Key rules &amp; points</h2>
+
+    <div class="key">
+      🔑 Rules:
+      <ul>
+        <li>1.useContext is a hook 👉 Only function component-la use pannalaam</li>
+        <li>2.Provider must wrap parent component</li>
+        <li>3.Context value change aana 👉 All consuming components re-render aagum</li>
+        <li>4.Small &amp; medium data-ku best 👉 Huge frequent update-ku Redux better</li>
+      </ul>
+    </div>
+
+    <h2>7.Compare with Props ;</h2>
+
+    <table>
+      <tr>
+        <th>Props</th>
+        <th>useContext</th>
+      </tr>
+      <tr>
+        <td>Parent → Child</td>
+        <td>Global</td>
+      </tr>
+      <tr>
+        <td>Props drilling problem</td>
+        <td>No drilling</td>
+      </tr>
+      <tr>
+        <td>Simple</td>
+        <td>Shared state</td>
+      </tr>
+    </table>
+
+    <h2>8.Interview questions ;</h2>
+
+    <p>Ask students 👇</p>
+
+    <ol>
+      <li>What problem does useContext solve?</li>
+      <li>What are the parts of Context API?</li>
+      <li>Provider illaama useContext use panna mudiyuma?</li>
+      <li>Props vs Context?</li>
+      <li>When should we NOT use useContext?</li>
+    </ol>
+
+    <h2>9.Teaching order;</h2>
+
+    <ul>
+      <li>5 min – Props drilling problem</li>
+      <li>5 min – Why useContext</li>
+      <li>5 min – Context API parts</li>
+      <li>5 min – Flow explanation</li>
+      <li>5 min – Real example</li>
+      <li>3 min – Rules</li>
+      <li>2 min – Interview Q&amp;A</li>
+    </ul>
+
+  </div>
+</body>
+</html>
+```
