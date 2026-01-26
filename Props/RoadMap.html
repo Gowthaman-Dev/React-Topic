@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>React Props Roadmap - Table</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f6f8;
+      padding: 20px;
+      line-height: 1.7;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: auto;
+      background: #ffffff;
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      color: #2c3e50;
+      margin-bottom: 20px;
+      border-left: 6px solid #3498db;
+      padding-left: 12px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th, td {
+      border: 1px solid #ccc;
+      padding: 12px;
+      vertical-align: top;
+    }
+
+    th {
+      background-color: #ecf0f1;
+      text-align: left;
+    }
+
+    ul {
+      margin: 0;
+      padding-left: 20px;
+    }
+
+    li {
+      margin-bottom: 6px;
+    }
+
+    .green {
+      background-color: #ecf9f1;
+    }
+
+    .purple {
+      background-color: #f5eef8;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+
+    <h2>Roadmap;</h2>
+
+    <table>
+      <tr>
+        <th>Step</th>
+        <th>Topic</th>
+      </tr>
+
+      <tr>
+        <td>1️</td>
+        <td>Introduction ->  Flow Concept</td>
+      </tr>
+
+      <tr>
+        <td>2</td>
+        <td>Why we use Props? -> data ->UI ->display</td>
+      </tr>
+
+      <tr>
+        <td>3</td>
+        <td>Immutable</td>
+      </tr>
+
+      <tr>
+        <td>4</td>
+        <td>Props Drilling -> GrandChild</td>
+      </tr>
+
+      <tr>
+        <td>5</td>
+        <td>Problems with Props Drilling</td>
+      </tr>
+
+      <tr>
+        <td>6</td>
+        <td>Solution – useContext ->Props passing Direct access -> data -> global ->access</td>
+      </tr>
+
+      <tr>
+        <td>7</td>
+        <td>Props vs useContext ->App-level shared data -> useContext</td>
+      </tr>
+
+      <tr class="green">
+        <td>8</td>
+        <td>
+          🟢 Use Props when:
+          <ul>
+            <li>*UI related data</li>
+            <li>*Reusable components</li>
+          </ul>
+        </td>
+      </tr>
+
+      <tr class="purple">
+        <td>8</td>
+        <td>
+          🟣 Use useContext when
+          <ul>
+            <li>*Same data many components-ku venum</li>
+            <li>*App-level data</li>
+            <li>*Props drilling avoid panna</li>
+          </ul>
+        </td>
+      </tr>
+
+      <tr>
+        <td>9</td>
+        <td>Passing Function as Props;</td>
+      </tr>
+
+      <tr>
+        <td>10</td>
+        <td>
+          Destructuring Props
+          <ul>
+            <li>i)Without destructuring</li>
+            <li>ii)With destructuring</li>
+            <li>iii)Direct-aa function argument-la destructuring</li>
+          </ul>
+        </td>
+      </tr>
+
+      <tr>
+        <td>11</td>
+        <td>What is defaultProps?</td>
+      </tr>
+
+      <tr>
+        <td>12</td>
+        <td>map() naa enna?</td>
+      </tr>
+
+      <tr>
+        <td>13</td>
+        <td>key</td>
+      </tr>
+
+    </table>
+
+  </div>
+</body>
+</html>

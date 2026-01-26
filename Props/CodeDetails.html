@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>React Props & App-level State</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f6f8;
+      padding: 20px;
+      line-height: 1.7;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: auto;
+      background: #ffffff;
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      color: #2c3e50;
+      margin-top: 30px;
+      border-left: 5px solid #3498db;
+      padding-left: 10px;
+    }
+
+    h3 {
+      color: #34495e;
+      margin-top: 25px;
+    }
+
+    p {
+      margin: 10px 0;
+    }
+
+    ul {
+      margin-left: 25px;
+    }
+
+    li {
+      margin-bottom: 6px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+    }
+
+    th, td {
+      border: 1px solid #ccc;
+      padding: 10px;
+      text-align: left;
+    }
+
+    th {
+      background: #ecf0f1;
+    }
+
+    .box {
+      background: #eef6ff;
+      padding: 15px;
+      border-left: 5px solid #2980b9;
+      margin: 20px 0;
+    }
+
+    .divider {
+      margin: 30px 0;
+      border-top: 2px dashed #ccc;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+
+    <table>
+      <tr>
+        <th>Purpose</th>
+        <th>Best Tool</th>
+      </tr>
+      <tr>
+        <td>UI data</td>
+        <td>Props</td>
+      </tr>
+      <tr>
+        <td>App-level shared data</td>
+        <td>useContext</td>
+      </tr>
+      <tr>
+        <td>Complex global state</td>
+        <td>Redux / Zustand</td>
+      </tr>
+      <tr>
+        <td>Logic reuse</td>
+        <td>Custom Hooks</td>
+      </tr>
+    </table>
+
+    <div class="box">
+      <p>❌ One component-ku mattum</p>
+      <p>✅ Many components / many screens</p>
+    </div>
+
+    <h2>🏠 Real-Life Example (Best 💯)</h2>
+
+    <p>House example;</p>
+    <ul>
+      <li>*Hall light</li>
+      <li>*Bedroom light</li>
+      <li>*Kitchen light</li>
+    </ul>
+
+    <p>👉 Main switch OFF → ellam OFF</p>
+    <p>💡 Main switch = App-level data</p>
+
+    <table>
+      <tr>
+        <th>App-level Data</th>
+        <th>Why?</th>
+      </tr>
+      <tr>
+        <td>Login user</td>
+        <td>All pages need</td>
+      </tr>
+      <tr>
+        <td>Theme</td>
+        <td>Entire app change</td>
+      </tr>
+      <tr>
+        <td>Language</td>
+        <td>Full app text</td>
+      </tr>
+      <tr>
+        <td>Auth status</td>
+        <td>Route protection</td>
+      </tr>
+    </table>
+
+    <div class="divider"></div>
+
+    <h2>Tamil Explanation (Simple 🔥)</h2>
+
+    <p>props oru object.</p>
+    <p>Andha object-kulla irukka values-a</p>
+    <p>direct-aa variables-aa eduthukradhu thaan destructuring.</p>
+
+    <div class="divider"></div>
+
+    <h3>1.First understand props enna?</h3>
+
+    <p>Parent component:</p>
+    <p>&lt;StudentList students={students} age={20} /&gt;</p>
+
+    <p>Child component-ku React send pannradhu 👇</p>
+
+    <div class="box">
+      <p>props = {</p>
+      <p>&nbsp;&nbsp;students: [...],</p>
+      <p>&nbsp;&nbsp;age: 20</p>
+      <p>}</p>
+    </div>
+
+    <p>👉 props = oru object</p>
+
+    <div class="divider"></div>
+
+    <h3>2.Without destructuring (normal way)</h3>
+
+    <div class="box">
+      <p>const StudentList = (props) => {</p>
+      <p>&nbsp;&nbsp;console.log(props.students);</p>
+      <p>&nbsp;&nbsp;console.log(props.age);</p>
+      <p>&nbsp;&nbsp;return &lt;div /&gt;;</p>
+      <p>};</p>
+    </div>
+
+    <p>👉 Every time props. nu type panna vendiyadhu</p>
+
+    <div class="divider"></div>
+
+    <h3>3.With destructuring (clean way)</h3>
+
+    <div class="box">
+      <p>const StudentList = (props) => {</p>
+      <p>&nbsp;&nbsp;const { students, age } = props;</p>
+      <p>&nbsp;&nbsp;console.log(students);</p>
+      <p>&nbsp;&nbsp;console.log(age);</p>
+      <p>&nbsp;&nbsp;return &lt;div /&gt;;</p>
+      <p>};</p>
+    </div>
+
+    <div class="divider"></div>
+
+    <h3>4.Direct-aa function argument-la destructuring</h3>
+
+    <div class="box">
+      <p>const StudentList = ({ students, age }) => {</p>
+      <p>&nbsp;&nbsp;return (</p>
+      <p>&nbsp;&nbsp;&nbsp;&nbsp;&lt;div&gt;</p>
+      <p>&nbsp;&nbsp;&nbsp;&nbsp;{students.map(s =&gt; (</p>
+      <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;p&gt;{s.name}&lt;/p&gt;</p>
+      <p>&nbsp;&nbsp;&nbsp;&nbsp;))}</p>
+      <p>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;</p>
+      <p>&nbsp;&nbsp;);</p>
+      <p>};</p>
+    </div>
+
+    <div class="divider"></div>
+
+    <h3>BEST PRACTICE (Interview Answer)</h3>
+
+    <div class="box">
+      <p>const StudentList = ({ students = [] }) => {</p>
+      <p>&nbsp;&nbsp;return students.map(...);</p>
+      <p>};</p>
+    </div>
+
+    <p>default props la array of object ku errror varama iruka { students = [] } ippudi podanum naa sonnathu crt ta</p>
+
+    <div class="divider"></div>
+
+    <h3>1.map() naa enna?</h3>
+
+    <p>👉 map() = array loop method</p>
+
+    <p><strong>English:</strong></p>
+    <p>map() is used to loop through an array and return a new array.</p>
+
+    <p><strong>Tamil:</strong></p>
+    <p>map() na array-oda ella values-um one by one loop panni,</p>
+    <p>pudhu result array create pannrathu.</p>
+
+    <div class="divider"></div>
+
+    <h3>2.key</h3>
+
+    <div class="box">
+      <p>“React-ku idhellam same component maadhiri theriyum.</p>
+      <p>First edhu? Second edhu? Third edhu?</p>
+      <p>React-ku theriyadhu.”</p>
+
+      <p>“Ippo React-ku clear.</p>
+      <p>Idhu first student</p>
+      <p>Idhu second student</p>
+      <p>Idhu third student”</p>
+    </div>
+
+  </div>
+</body>
+</html>

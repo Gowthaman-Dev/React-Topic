@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>useContext Teaching Notes</title>
+  <style>
+    body{
+      font-family: Arial, Helvetica, sans-serif;
+      background:#f4f6f8;
+      padding:20px;
+      line-height:1.7;
+    }
+    .container{
+      max-width:1100px;
+      margin:auto;
+      background:#ffffff;
+      padding:25px;
+      border-radius:8px;
+      box-shadow:0 0 10px rgba(0,0,0,0.08);
+    }
+    h1,h2,h3{
+      color:#2c3e50;
+    }
+    hr{
+      border:none;
+      border-top:2px dashed #ccc;
+      margin:25px 0;
+    }
+    ul{
+      margin-left:25px;
+    }
+    li{
+      margin-bottom:6px;
+    }
+    table{
+      width:100%;
+      border-collapse:collapse;
+      margin:15px 0;
+    }
+    table,th,td{
+      border:1px solid #ccc;
+    }
+    th,td{
+      padding:10px;
+      text-align:left;
+    }
+    .highlight{
+      background:#f9fafb;
+      padding:15px;
+      border-left:5px solid #3498db;
+      margin:15px 0;
+    }
+    .code{
+      background:#272822;
+      color:#f8f8f2;
+      padding:15px;
+      border-radius:6px;
+      font-family: Consolas, monospace;
+      white-space:pre-wrap;
+      margin:15px 0;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+
+<h2>1️.Problem introduce pannu</h2>
+
+<p>“Props-ah ellaa level-kum anuppinaa enna problem varum?”</p>
+
+<p>🧠 Concept:</p>
+
+<ul>
+  <li>❌ Props Drilling</li>
+  <li>👉 Parent → Child → SubChild → DeepChild</li>
+</ul>
+
+<p>Define pannunga:</p>
+
+<div class="highlight">
+Props drilling means passing props through multiple component levels even when intermediate components don’t need the data.
+</div>
+
+<hr>
+
+<h2>2.useContext yen thevai?</h2>
+
+<ul>
+  <li>*Same data</li>
+  <li>*Many components use pannum</li>
+  <li>*Props drilling avoid pannanum</li>
+</ul>
+
+<p>=&gt;useContext use panninaa data-ah ellaa component-kum direct-aa share pannalaam.</p>
+
+<hr>
+
+<h2>3.Context API overview;</h2>
+
+<ul>
+  <li>1. createContext</li>
+  <li>2. Provider</li>
+  <li>3. Consumer (useContext)</li>
+</ul>
+
+<table>
+  <tr>
+    <th>Term</th>
+    <th>Meaning</th>
+  </tr>
+  <tr>
+    <td>createContext</td>
+    <td>Context create pannuradhu</td>
+  </tr>
+  <tr>
+    <td>Provider</td>
+    <td>Data supply pannuradhu</td>
+  </tr>
+  <tr>
+    <td>useContext</td>
+    <td>Data receive pannuradhu</td>
+  </tr>
+</table>
+
+<p>Provider illama useContext work aagathu ❌</p>
+
+<hr>
+
+<h2>4. 👉 Flow:</h2>
+
+<div class="highlight">
+Context create<br>
+↓<br>
+Provider wrap<br>
+↓<br>
+useContext consume
+</div>
+
+<p>Class-la indha question kekkalaam:</p>
+
+<ul>
+  <li>“Provider yaaru?”</li>
+  <li>“Consumer yaaru?”</li>
+</ul>
+
+<hr>
+
+<h2>5.Example scenario ;</h2>
+
+<p>Situation explain pannu:</p>
+
+<p>“Login panna user name ellaa page-layum thevai”</p>
+
+<p>Components:</p>
+
+<ul>
+  <li>App</li>
+  <li>Navbar</li>
+  <li>Profile</li>
+  <li>Dashboard</li>
+</ul>
+
+<ul>
+  <li>❌ Props drilling panna: App → Navbar → Profile</li>
+  <li>✅ useContext panna: Direct-aa use pannalaam</li>
+</ul>
+
+<hr>
+
+<h2>6.Key rules & points</h2>
+
+<p>🔑 Rules:</p>
+
+<ul>
+  <li>1.useContext is a hook 👉 Only function component-la use pannalaam</li>
+  <li>2.Provider must wrap parent component</li>
+  <li>3.Context value change aana 👉 All consuming components re-render aagum</li>
+  <li>4.Small & medium data-ku best 👉 Huge frequent update-ku Redux better</li>
+</ul>
+
+<hr>
+
+<h2>7.Compare with Props ;</h2>
+
+<table>
+  <tr>
+    <th>Props</th>
+    <th>useContext</th>
+  </tr>
+  <tr>
+    <td>Parent → Child</td>
+    <td>Global</td>
+  </tr>
+  <tr>
+    <td>Props drilling problem</td>
+    <td>No drilling</td>
+  </tr>
+  <tr>
+    <td>Simple</td>
+    <td>Shared state</td>
+  </tr>
+</table>
+
+<hr>
+
+<h2>8.Interview questions ;</h2>
+
+<p>Ask students 👇</p>
+
+<ul>
+  <li>1.What problem does useContext solve?</li>
+  <li>2.What are the parts of Context API?</li>
+  <li>3.Provider illaama useContext use panna mudiyuma?</li>
+  <li>4.Props vs Context?</li>
+  <li>5.When should we NOT use useContext?</li>
+</ul>
+
+<hr>
+
+<h2>9.Teaching order;</h2>
+
+<ul>
+  <li>5 min  – Props drilling problem</li>
+  <li>5 min  – Why useContext</li>
+  <li>5 min  – Context API parts</li>
+  <li>5 min  – Flow explanation</li>
+  <li>5 min  – Real example</li>
+  <li>3 min  – Rules</li>
+  <li>2 min  – Interview Q&A</li>
+</ul>
+
+<hr>
+
+<h2>useContext – CODE FLOW</h2>
+
+<div class="highlight">
+Create → Provide → Consume
+</div>
+
+<h3>🔹 STEP 1: Context create pannuradhu</h3>
+
+<p>📁 Usually context folder create pannuvaanga<br>
+📄 UserContext.js</p>
+
+<div class="code">
+import { createContext } from "react";
+
+const UserContext = createContext();
+
+export default UserContext;
+</div>
+
+<p>🧠 Explain to students:</p>
+
+<ul>
+  <li>*createContext() → new context object</li>
+  <li>*Idhu data store maadhiri</li>
+</ul>
+
+<hr>
+
+<h3>STEP 2: Provider use pannuradhu (DATA SUPPLY)</h3>
+
+<p>📍 Usually App.jsx / App.js</p>
+
+<div class="code">
+import UserContext from "./UserContext";
+import Navbar from "./Navbar";
+
+function App() {
+  const userName = "Rocky";
+
+  return (
+    &lt;UserContext.Provider value={userName}&gt;
+      &lt;Navbar /&gt;
+    &lt;/UserContext.Provider&gt;
+  );
+}
+
+export default App;
+</div>
+
+<p>🧠 Explain clearly:</p>
+
+<ul>
+  <li>*Provider → data supply pannum</li>
+  <li>*value prop-la data pass pannrom</li>
+  <li>*Navbar + inside irukka ellaa components-kum access irukkum</li>
+</ul>
+
+<p>📌 Important warning ⚠️:</p>
+
+<p>Provider illaama useContext work aagathu ❌</p>
+
+<hr>
+
+<h3>🔹 STEP 3: useContext use pannuradhu (DATA RECEIVE)</h3>
+
+<p>📄 Navbar.jsx</p>
+
+<div class="code">
+import { useContext } from "react";
+import UserContext from "./UserContext";
+
+function Navbar() {
+  const user = useContext(UserContext);
+
+  return (
+    &lt;h1&gt;Welcome {user}&lt;/h1&gt;
+  );
+}
+
+export default Navbar;
+</div>
+
+<p>🧠 Explain:</p>
+
+<ul>
+  <li>*useContext(UserContext) → data edukkum</li>
+  <li>*Props use pannala</li>
+  <li>*Direct access ✅</li>
+</ul>
+
+<p>📌 One-line explanation:<br>
+useContext is used to consume data from context.</p>
+
+<hr>
+
+<h2>FULL FLOW REVISION (CLASS-LA SOLLRA DIALOGUE)</h2>
+
+<ul>
+  <li>createContext la context create pannom</li>
+  <li>Provider la data supply pannom</li>
+  <li>useContext la data receive pannom</li>
+</ul>
+
+<p>🔥 Simple 🔥</p>
+
+<hr>
+
+<h2>🔷 useContext with OBJECT (REAL WORLD)</h2>
+
+<p>Provider:</p>
+
+<div class="code">
+const user = {
+  name: "Rocky",
+  role: "Admin"
+};
+
+&lt;UserContext.Provider value={user}&gt;
+</div>
+
+<p>Consumer:</p>
+
+<div class="code">
+const user = useContext(UserContext);
+
+&lt;p&gt;{user.name}&lt;/p&gt;
+&lt;p&gt;{user.role}&lt;/p&gt;
+</div>
+
+<p>🧠 Mention pannunga:</p>
+
+<ul>
+  <li>*value string / object / array / function anything irukkalaam</li>
+</ul>
+
+<hr>
+
+<h2>🔷 COMMON MISTAKES (INTERVIEW + CLASS)</h2>
+
+<ul>
+  <li>❌ Provider outside-la illa</li>
+  <li>❌ Wrong context import</li>
+  <li>❌ useContext outside component</li>
+</ul>
+
+<hr>
+
+<h2>🔷 Class-la kekka best QUESTIONS</h2>
+
+<ul>
+  <li>*Why Provider is required?</li>
+  <li>*value prop enna pannuthu?</li>
+  <li>*One context multiple components use pannalaama?</li>
+  <li>*Props irundhaalum useContext yen thevai</li>
+</ul>
+
+</div>
+
+</body>
+</html>

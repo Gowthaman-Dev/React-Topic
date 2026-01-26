@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>React Props – Teaching Notes</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f6f8;
+      line-height: 1.7;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: auto;
+      background: #ffffff;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      color: #2c3e50;
+      border-bottom: 2px solid #ddd;
+      padding-bottom: 6px;
+      margin-top: 40px;
+    }
+
+    p {
+      margin: 6px 0;
+    }
+
+    ul {
+      margin-left: 20px;
+    }
+
+    .rule {
+      background: #eef6ff;
+      padding: 10px;
+      border-left: 5px solid #3498db;
+      margin: 10px 0;
+    }
+
+    .memory {
+      background: #fdf6e3;
+      padding: 10px;
+      border-left: 5px solid #f1c40f;
+      margin: 10px 0;
+      font-weight: bold;
+    }
+
+    .warning {
+      background: #fdecea;
+      padding: 10px;
+      border-left: 5px solid #e74c3c;
+      margin: 10px 0;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+    }
+
+    th, td {
+      border: 1px solid #ccc;
+      padding: 10px;
+      text-align: left;
+    }
+
+    th {
+      background: #f0f0f0;
+    }
+
+    pre {
+      background: #f8f8f8;
+      padding: 15px;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+
+  <h2>1️.Introduction (5 mins);</h2>
+  <p>“React-la oru component-la irukka data, innoru component-ku eppadi anuppuveenga?”</p>
+  <p>👉 Props introduce pannunga</p>
+
+  <p>Props = Properties</p>
+  <p>Used to pass data from Parent → Child</p>
+
+  <p>Parent component-la irunthu Child component-ku data anuppurathukku props use pannrom.</p>
+
+  <hr>
+
+  <h2>2.Why we use Props?</h2>
+  <p>Situation Explain;</p>
+  <ul>
+    <li>*Oru component-la data irukku</li>
+    <li>*UI-la vera component-la display panna venum</li>
+  </ul>
+
+  <p>👉 Then we use Props;</p>
+
+  <p>Board-la points;</p>
+  <ul>
+    <li>*Data sharing</li>
+    <li>*Dynamic UI</li>
+    <li>*Reusable components</li>
+  </ul>
+
+  <div class="memory">
+    🧠 Memory Line<br>
+    * “Props → Pass data<br>
+    * State → Manage data”
+  </div>
+
+  <hr>
+
+  <h2>3️.Props Flow Concept ?</h2>
+
+  <div class="rule">
+    Important Rule 🔑<br>
+    *Props enable unidirectional data flow<br>
+    *Parent → Child
+  </div>
+
+  <hr>
+
+  <h2>4️.Props are Immutable</h2>
+
+  <ul>
+    <li>*Props are immutable</li>
+    <li>*Child cannot change props</li>
+  </ul>
+
+  <p>=&gt;Child component-la props-a modify panna mudiyathu.</p>
+
+  <p>Parent kudutha data = rule</p>
+  <p>Child = just reader</p>
+
+  <hr>
+
+  <h2>5️.Props Drilling</h2>
+
+  <p>Start with a Problem Story ;</p>
+
+  <p>
+    “Oru data App-la irukku<br>
+    Aana athu GrandChild-ku mattum venum<br>
+    Middle components-ku thevai illa”
+  </p>
+
+  <pre>
+App
+ └── Parent
+   └── Child
+      └── GrandChild
+  </pre>
+
+  <pre>
+&lt;App userName="Gowtham" /&gt;
+&lt;Parent userName={userName} /&gt;
+&lt;Child userName={userName} /&gt;
+&lt;GrandChild userName={userName} /&gt;
+  </pre>
+
+  <ul>
+    <li>*Parent & Child use panna maattanga</li>
+    <li>*Just forward pannranga 😵</li>
+    <li>*This is Props Drilling</li>
+  </ul>
+
+  <hr>
+
+  <h2>6️.Problems with Props Drilling</h2>
+
+  <div class="warning">
+    =&gt;Hard to maintain<br>
+    =&gt;Hard to debug<br>
+    =&gt;Code messy<br>
+    =&gt;Components tightly coupled
+  </div>
+
+  <p>*Thevai illaatha components moolama data carry pannrathu problem.</p>
+
+  <hr>
+
+  <h2>7.Solution – useContext</h2>
+
+  <table>
+    <tr>
+      <th>Without useContext</th>
+      <th>With useContext</th>
+    </tr>
+    <tr>
+      <td>Props passing</td>
+      <td>Direct access</td>
+    </tr>
+    <tr>
+      <td>Confusing code</td>
+      <td>Clean code</td>
+    </tr>
+    <tr>
+      <td>Hard to scale</td>
+      <td>Easy to scale</td>
+    </tr>
+  </table>
+
+  <p>*useContext use pannina data-va global-aa store panni, thevai irukkura component direct-aa access pannalaam.</p>
+
+  <hr>
+
+  <h2>9.Props vs useContext vs Others;</h2>
+
+  <table>
+    <tr>
+      <th>Purpose</th>
+      <th>Best Tool</th>
+    </tr>
+    <tr>
+      <td>UI data</td>
+      <td>Props</td>
+    </tr>
+    <tr>
+      <td>App-level shared data</td>
+      <td>useContext</td>
+    </tr>
+    <tr>
+      <td>Complex global state</td>
+      <td>Redux / Zustand</td>
+    </tr>
+    <tr>
+      <td>Logic reuse</td>
+      <td>Custom Hooks</td>
+    </tr>
+  </table>
+
+  <hr>
+
+  <h2>10. Golden Rules (Final 2 mins 🔑)</h2>
+
+  <p>🟢 Use Props when</p>
+  <ul>
+    <li>*Parent & Child close-aa irukku</li>
+    <li>*UI related data</li>
+    <li>*Reusable components</li>
+  </ul>
+
+  <p>🟣 Use useContext when</p>
+  <ul>
+    <li>*Same data many components-ku venum</li>
+    <li>*App-level data</li>
+    <li>*Props drilling avoid panna</li>
+  </ul>
+
+  <hr>
+
+  <h2>11.props.children</h2>
+
+  <hr>
+
+  <h2>12.Passing Function as Props;</h2>
+
+  <p>Concept:</p>
+  <p>👉 Props-la data mattum illa, function-um pass panna mudiyum.</p>
+
+  <hr>
+
+  <h2>13.Destructuring Props (Clean Code Concept)</h2>
+
+  <p>Without destructuring:</p>
+  <pre>
+props.userName
+props.age
+  </pre>
+
+  <p>With destructuring:</p>
+  <pre>
+const { userName, age } = props;
+  </pre>
+
+  <p>*Destructuring makes props usage cleaner and more readable.</p>
+
+  <hr>
+
+  <h2>14.Props vs State (1 slide / 2 mins recap)</h2>
+
+  <table>
+    <tr>
+      <th>Props</th>
+      <th>State</th>
+    </tr>
+    <tr>
+      <td>Parent provides</td>
+      <td>Component owns</td>
+    </tr>
+    <tr>
+      <td>Read-only</td>
+      <td>Mutable</td>
+    </tr>
+    <tr>
+      <td>Cannot change</td>
+      <td>Can change</td>
+    </tr>
+    <tr>
+      <td>Used for data flow</td>
+      <td>Used for data control</td>
+    </tr>
+  </table>
+
+  <div class="memory">
+    🧠 Memory:<br>
+    *Props → Outside data<br>
+    *State → Inside data
+  </div>
+
+  <hr>
+
+  <h2>15.What is defaultProps?</h2>
+
+  <p>Definition:</p>
+  <p>👉 Props value parent-la irunthu varalana,</p>
+  <p>👉 default-aa oru value set panna use pannrathu = defaultProps</p>
+
+  <p>Why we use defaultProps?</p>
+  <ul>
+    <li>*App crash aaga koodaadhu</li>
+    <li>*UI blank-aa irukka koodaadhu</li>
+    <li>*Avoid undefined errors</li>
+    <li>*Better user experience</li>
+  </ul>
+
+  <p>🔸 Example – Real Life Think Pannu 🧠</p>
+  <p>Think like this: “Name kudukkala na ‘Guest’ nu kaamikkanum”</p>
+
+</div>
+
+</body>
+</html>
