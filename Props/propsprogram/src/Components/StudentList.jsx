@@ -1,21 +1,19 @@
-import StudentCard from "./StudentCard";
+import StudentCard from "../Components/StudentCard"
 
-const StudentList = ({students}) => {
-   
+const StudentList = ({details}) => {
+  
   return (
-    <div>
-      <h2>Student List</h2>
+    <>
+    {details.map((e)=>(
+      <StudentCard
+      key = {e.id}
+      name = {e.name}
+      age = {e.age}
+      department = {e.department}
+      />
+    ))}
+    </>
+  )
+}
 
-      {students.map((student) => (
-        <StudentCard
-          key={student.id}
-          name={student.name}
-          age={student.age}
-          course={student.course}
-        />
-      ))}
-    </div>
-  );
-};
-
-export default StudentList;
+export default StudentList

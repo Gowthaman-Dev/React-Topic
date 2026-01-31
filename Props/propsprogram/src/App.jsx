@@ -1,24 +1,17 @@
-import StudentList from "./Components/StudentList";
-
+import StudentList from "./Components/StudentList"
 
 const App = () => {
-  const students = [
-    { id: 1, name: "Gowtham", age: 22, course: "React" },
-    { id: 2, name: "Arun", age: 21, course: "Angular" },
-    { id: 3, name: "Priya", age: 23, course: "Vue" },
-  ];
-
+  const doctorDetails = [
+    {id:1,name:"Gowtham",age:21,department:"Eyes"},
+    {id:2,name:"Monisha",age:24,department:"MBBS"},
+    {id:3,name:"Jerlin",age:23,department:"MBBS"}
+  ]
   return (
     <>
-    <div className="bg-gray-700 text-white text-2xl p-10 text-center">
-      <h1>Student Details</h1>
-
-    
-      {/* Passing array of objects as props */}
-      <StudentList students={students} />
-    </div>
+    <h1 className="bg-black text-4xl text-center text-white p-8 ">Doctor List</h1>
+    <StudentList details={doctorDetails}/>
     </>
-  );
-};
+  )
+}
 
-export default App;
+export default App

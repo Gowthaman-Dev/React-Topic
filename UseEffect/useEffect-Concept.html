@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>React useEffect – Step 1</title>
+  <style>
+    body {
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background: #ffffff;
+      color: #1f2937;
+      line-height: 1.7;
+      padding: 32px;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: auto;
+      background: #f9fafb;
+      padding: 28px 32px;
+      border-radius: 12px;
+      border: 1px solid #e5e7eb;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+    }
+
+    h1, h2, h3 {
+      color: #2563eb;
+      margin-top: 32px;
+    }
+
+    .block {
+      margin-top: 18px;
+      padding: 12px 16px;
+      background: #eef2ff;
+      border-left: 5px solid #2563eb;
+      border-radius: 6px;
+    }
+
+    ul {
+      margin-left: 24px;
+      margin-top: 10px;
+    }
+
+    li {
+      margin: 8px 0;
+    }
+
+    pre {
+      background: #111827;
+      border-radius: 8px;
+      padding: 16px;
+      overflow-x: auto;
+      color: #e5e7eb;
+      margin-top: 14px;
+    }
+
+    .question {
+      color: #92400e;
+      font-weight: bold;
+    }
+
+    .important {
+      background: #fff1f2;
+      color: #991b1b;
+      font-weight: bold;
+      border-left: 5px solid #dc2626;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <h2>🔥 Step 1 – First Question to Students</h2>
+
+    <div class="block">
+      👉 “Component render aana udane oru vela nadakka vendum na React-la epdi panrom?”
+    </div>
+
+    <h3>Examples sollu:</h3>
+    <ul>
+      <li>✅ API call</li>
+      <li>✅ Page load aagumbodhu data show panna</li>
+      <li>✅ Title change panna</li>
+      <li>✅ Login user info eduka</li>
+    </ul>
+
+    <div class="block">
+      Apram sollu:
+    </div>
+
+    <div class="block">
+      👉 Itha panna use pannrathu than = useEffect
+    </div>
+
+    <h3>✅ Definition (Tamil + English)</h3>
+
+    <div class="block">
+      useEffect na enna?
+    </div>
+
+    <div class="block">
+      👉 Component render aanathuku apram run aagura function.
+    </div>
+
+    <div class="block">
+      Tamil:
+      <br />
+      Component screen-la varumbodhu illa state change aagumbodhu automatic-aa oru code run panna use pannrathu = useEffect
+    </div>
+
+    <div class="block">
+      English (one line):
+      <br />
+      👉 useEffect runs side effects after rendering.
+    </div>
+
+    <h3>🧠 Real Life Example</h3>
+
+    <div class="block">
+      Fan switch podra madhiri:
+      <br />
+      Room kulla pona udane fan ON
+    </div>
+
+    <ul>
+      <li>Room = Component</li>
+      <li>Fan = useEffect</li>
+    </ul>
+
+    <h3>✅ Basic Syntax</h3>
+
+    <pre><code>useEffect(() => {
+  console.log("Component Loaded");
+}, []);</code></pre>
+
+    <div class="block">
+      Explain:
+    </div>
+
+    <ul>
+      <li>🔹 First argument → function</li>
+      <li>🔹 Second argument → dependency array</li>
+    </ul>
+
+    <h2>🔥 CORE CONCEPTS (IMPORTANT)</h2>
+
+    <div class="block important">
+      Tomorrow class-la ithu MUST:
+    </div>
+
+    <h3>1️⃣ Empty Dependency []</h3>
+
+    <pre><code>useEffect(()=>{
+ console.log("Only once");
+},[])</code></pre>
+
+    <div class="block">
+      Meaning:
+      <br />
+      👉 Component first time load aagumbodhu mattum run aagum.
+    </div>
+
+    <div class="block">
+      Tamil:
+      <br />
+      Page open pannumbodhu oru thadava than nadakkum.
+      <br />
+      (API calls)
+    </div>
+
+    <h3>2️⃣ With Dependency</h3>
+
+    <pre><code>useEffect(()=>{
+ console.log(count);
+},[count])</code></pre>
+
+    <div class="block">
+      Meaning:
+      <br />
+      👉 count change aana every time run aagum.
+    </div>
+
+    <div class="block">
+      Tamil:
+      <br />
+      Count maarina udane effect run aagum.
+    </div>
+
+    <h3>3️⃣ Without Dependency</h3>
+
+    <pre><code>useEffect(()=>{
+ console.log("Always");
+})</code></pre>
+
+    <div class="block">
+      Meaning:
+      <br />
+      👉 Every render-kum run aagum.
+    </div>
+
+    <div class="block">
+      Tamil:
+      <br />
+      Button click pannalum, state update aanaalum – yella neramum odum.
+    </div>
+
+    <h3>⚠️ Interview Question</h3>
+
+    <div class="block">
+      useEffect types?
+    </div>
+
+    <ul>
+      <li>1️⃣ [] → one time</li>
+      <li>2️⃣ [state] → state change</li>
+      <li>3️⃣ nothing → every render</li>
+    </ul>
+
+    <h3>🧪 Small Demo Example (Teach Live)</h3>
+
+    <pre><code>const [count,setCount] = useState(0);
+
+useEffect(()=>{
+  console.log("Count Changed",count);
+},[count])</code></pre>
+
+    <div class="block">
+      Button click panna console la value varuthu → students wow 😄
+    </div>
+
+    <h3>🔥 Cleanup Concept (Advanced – last 10 mins)</h3>
+
+    <pre><code>useEffect(()=>{
+  return ()=>{
+    console.log("Component removed");
+  }
+},[])</code></pre>
+
+    <div class="block">
+      Explain:
+      <br />
+      Component close aana udane run aagum.
+    </div>
+
+    <div class="block">
+      Use:
+    </div>
+
+    <ul>
+      <li>Timers</li>
+      <li>Subscriptions</li>
+      <li>Event listeners</li>
+    </ul>
+
+    <h3>🎯 End Question to Students</h3>
+
+    <ul class="question">
+      <li>👉 useEffect ethuku use pannrom?</li>
+      <li>👉 dependency na enna?</li>
+      <li>👉 API call yenga poduvom?</li>
+    </ul>
+
+    <!-- ADD THIS CONTENT INSIDE THE SAME CONTAINER (CSS CHANGE PANNA VENDAM) -->
+
+<h2>✅ 1️⃣ useEffect runs AFTER render (Very Important Concept)</h2>
+
+<div class="block">
+  Students usually ninaippanga:
+</div>
+
+<div class="block">
+  👉 useEffect = render kulla nadakkum ❌
+</div>
+
+<div class="block">
+  Clarify pannunga:
+</div>
+
+<div class="block">
+  Truth:
+  <br />
+  👉 First component render aagum
+  <br />
+  👉 Apram than useEffect run aagum
+</div>
+
+<h3>Example sollu:</h3>
+
+<pre><code>console.log("Render");
+
+useEffect(()=>{
+ console.log("Effect");
+},[])</code></pre>
+
+<div class="block">
+  Output:
+</div>
+
+<pre><code>Render
+Effect</code></pre>
+
+<div class="block">
+  Tamil:
+  <br />
+  Screen first draw aagum → apram effect
+</div>
+
+<div class="block important">
+  Interview question varum 👇
+</div>
+
+<div class="block">
+  👉 useEffect before render ah after render ah?
+</div>
+
+<div class="block important">
+  Answer:
+  <br />
+  🔥 After render
+</div>
+
+<h2>✅ 2️⃣ Dependency Array = Watch List concept</h2>
+
+<div class="block">
+  Explain like CCTV 😄
+</div>
+
+<pre><code>useEffect(()=>{
+ ...
+},[count,name])</code></pre>
+
+<div class="block">
+  Tamil:
+  <br />
+  👉 count or name change aana mattum effect odum.
+</div>
+
+<div class="block">
+  Explain sentence:
+  <br />
+  Dependency array na – entha variable change aana effect run aaganum nu sollra list
+</div>
+
+<h2>✅ 3️⃣ Infinite Loop Problem (Very common mistake)</h2>
+
+<div class="block">
+  Show mistake:
+</div>
+
+<pre><code>useEffect(()=>{
+ setCount(count+1)
+})</code></pre>
+
+<div class="block">
+  Explain:
+</div>
+
+<ul>
+  <li>❌ dependency kudukkala</li>
+  <li>❌ state update panrom</li>
+</ul>
+
+<div class="block">
+  Result:
+  <br />
+  👉 Infinite loop 🔁
+</div>
+
+<div class="block important">
+  Tamil:
+  <br />
+  Effect → setState → render → effect → setState → render 😵
+</div>
+
+<div class="block">
+  Students-ku romba useful warning.
+</div>
+
+<h2>✅ 4️⃣ Multiple useEffect use panna mudiyum</h2>
+
+<div class="block">
+  Most beginners ninaippanga:
+</div>
+
+<div class="block">
+  👉 Oru component-la oru useEffect than ❌
+</div>
+
+<div class="block">
+  Teach:
+</div>
+
+<pre><code>useEffect(()=>{},[])
+useEffect(()=>{},[count])</code></pre>
+
+<div class="block">
+  Tamil:
+  <br />
+  Different works-ku different useEffect use pannalam
+</div>
+
+<!-- OPTIONAL SECTION – SAME CSS, JUST ADD CONTENT -->
+
+<h2>💯 Only OPTIONAL (not mandatory tomorrow)</h2>
+
+<div class="block">
+  If you want 100% pro-level (later class):
+</div>
+
+<ul>
+  <li>🔹 StrictMode double call</li>
+  <li>🔹 async API inside useEffect</li>
+  <li>🔹 cleanup with timers example</li>
+</ul>
+
+<div class="block important">
+  But tomorrow teaching-ku ithu theva illa.
+</div>
+
+
+  </div>
+</body>
+</html>
