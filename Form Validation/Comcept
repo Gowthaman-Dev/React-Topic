@@ -1,0 +1,24 @@
+React Form Validation Flow:
+
+Create state
+
+Capture event
+
+Get name/value
+
+preventDefault
+
+Empty check
+
+Email check
+
+Password check
+
+Show error
+
+Stop submit (return)
+
+Save data
+
+Reset
+

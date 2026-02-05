@@ -1,0 +1,140 @@
+import { useEffect, useRef, useState } from "react"
+
+function App() {
+
+  const [count, setCount] = useState(0)
+  const prevCount = useRef(0)
+
+  useEffect(() => {
+    prevCount.current = count
+  }, [count])
+
+  const handleClick = () => {
+    setCount(prev => prev + 1)
+  }
+
+  
+  return (
+    <>
+      <h1>Current Value : {count}</h1>
+      <h2>Previous Value : {prevCount.current}</h2>
+
+      <button onClick={handleClick}>Increment</button>
+    </>
+  )
+}
+
+
+
+🔥 useRef UI-la show aagaathu.
+
+Appo kelvi:
+
+👉 <h2>{prevCount.current}</h2> eppadi update aaguthu?
+
+🎯 Answer:
+UI update aagurathu useState nala thaan.
+useRef just value hold pannuthu.
+Step by step flow (slow ah explain pannunga)
+Initial:
+count = 0
+prevCount = 0
+
+
+UI:
+
+Current: 0
+Previous: 0
+
+Button click →
+
+setCount() run aagum
+
+🔥 Component rerender aagum (because useState)
+
+Now:
+
+count = 1
+prevCount = 0
+
+
+So UI:
+
+Current: 1
+Previous: 0
+
+After render → useEffect run aagum:
+prevCount.current = count
+
+
+So:
+
+prevCount = 1
+
+
+BUT:
+
+⚠️ rerender illa (because ref)
+
+So UI still:
+
+Previous: 0
+
+Next click:
+
+Again setCount → rerender
+
+Now React read pannum:
+
+prevCount.current = 1
+
+
+So UI shows:
+
+Previous: 1
+
+🔥 Main teaching sentence (MUST SAY):
+
+useRef value change panninaa UI update aagaathu — but next state rerender la athu screen-la theriyum
+
+Tamil:
+
+👉 ref update pannum
+👉 UI marumadi varathu
+👉 next state change vanthaa
+👉 ref value screen-la varum
+
+🧠 Board diagram
+
+Draw:
+
+Button
+  ↓
+useState → rerender → UI update
+  ↓
+useEffect → useRef update (background)
+
+One English interview line:
+
+Refs don’t trigger re-render, but their values appear on the next render caused by state.
+
+Super short Tamil version:
+
+👉 UI change = useState
+👉 Memory store = useRef
+👉 Screen refresh = state nala
+👉 Ref value next render-la kaattum
+
+
+
+--------------------------------------------------------------------------------------------------
+
+🧑‍🏫 Correct answer (Tamil + English):
+Tamil:
+
+👉 useRef direct-ah UI update panna mudiyathu.
+👉 Aana useState rerender varum pothu, useRef value screen-la kaattalaam.
+
+--------------------------------------------------------------------------------------------------
+
+

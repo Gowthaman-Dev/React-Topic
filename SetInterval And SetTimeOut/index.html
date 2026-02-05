@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>setTimeout & setInterval</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f6f8;
+      padding: 20px;
+      line-height: 1.7;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: auto;
+      background: #ffffff;
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    h1 {
+      text-align: center;
+      color: #2c3e50;
+    }
+
+    h2 {
+      color: #1e88e5;
+      border-bottom: 2px solid #e0e0e0;
+      padding-bottom: 5px;
+      margin-top: 30px;
+    }
+
+    h3 {
+      color: #d84315;
+      margin-top: 20px;
+    }
+
+    p {
+      margin: 6px 0;
+    }
+
+    .box {
+      background: #f9f9f9;
+      border-left: 5px solid #1e88e5;
+      padding: 15px;
+      margin: 15px 0;
+      border-radius: 6px;
+    }
+
+    .syntax {
+      background: #272822;
+      color: #f8f8f2;
+      padding: 12px;
+      border-radius: 6px;
+      font-family: Consolas, monospace;
+      margin: 10px 0;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+
+    table th, table td {
+      border: 1px solid #ccc;
+      padding: 10px;
+      text-align: center;
+    }
+
+    table th {
+      background: #e3f2fd;
+    }
+
+    ul {
+      margin-left: 20px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+
+  <h1>🧠 Topic Name<br>setTimeout & setInterval</h1>
+
+  <div class="box">
+    <p>👉 English: Used to run code after some time or repeatedly.</p>
+  </div>
+
+  <h2>1️⃣ setTimeout</h2>
+
+  <h3>Meaning:</h3>
+  <p>Tamil:</p>
+  <p>👉 Oru vela delay apram once nadakka.</p>
+
+  <h3>Syntax:</h3>
+  <div class="syntax">
+    setTimeout(()=>{<br>
+    &nbsp;console.log("Hello")<br>
+    },2000)
+  </div>
+
+  <p>🧠 2000 = 2 seconds</p>
+
+  <h3>Explain to students:</h3>
+  <p>👉 2 sec wait pannitu “Hello” print aagum.</p>
+
+  <h3>Clear Timeout</h3>
+  <div class="syntax">
+    const id = setTimeout(...)
+    <br>
+    clearTimeout(id)
+  </div>
+
+  <p>Tamil:</p>
+  <p>Stop pannalam.</p>
+
+  <h2>2️⃣ setInterval</h2>
+
+  <h3>Meaning:</h3>
+  <p>Tamil:</p>
+  <p>👉 Same work thirumba thirumba nadakka.</p>
+
+  <h3>Syntax:</h3>
+  <div class="syntax">
+    setInterval(()=>{<br>
+    &nbsp;console.log("Hi")<br>
+    },1000)
+  </div>
+
+  <p>🧠 Every 1 second.</p>
+
+  <h3>Clear Interval</h3>
+  <div class="syntax">
+    clearInterval(id)
+  </div>
+
+  <h2>🔥 Difference (board la)</h2>
+
+  <table>
+    <tr>
+      <th>setTimeout</th>
+      <th>setInterval</th>
+    </tr>
+    <tr>
+      <td>Once</td>
+      <td>Repeated</td>
+    </tr>
+    <tr>
+      <td>Delay</td>
+      <td>Continuous</td>
+    </tr>
+    <tr>
+      <td>clearTimeout</td>
+      <td>clearInterval</td>
+    </tr>
+  </table>
+
+  <h2>3️⃣ Callback Function</h2>
+
+  <div class="syntax">
+    ()=>{}
+  </div>
+
+  <p>Tamil:</p>
+  <p>Time mudinja apram run aagura function.</p>
+
+  <h2>4️⃣ Time in milliseconds</h2>
+  <ul>
+    <li>1000 = 1 second</li>
+    <li>2000 = 2 seconds</li>
+  </ul>
+
+  <p>Teach this clearly.</p>
+
+  <h2>5️⃣ Return id concept</h2>
+
+  <div class="syntax">
+    const timer = setInterval(...)
+  </div>
+
+  <p>Tamil:</p>
+  <p>ID save panninaa stop panna mudiyum.</p>
+
+  <h2>6️⃣ Real Life Examples</h2>
+
+  <h3>🧠 Explain like this:</h3>
+
+  <p><strong>setTimeout:</strong></p>
+  <ul>
+    <li>OTP popup after 2 sec</li>
+    <li>Loader hide after 3 sec</li>
+  </ul>
+
+  <p><strong>setInterval:</strong></p>
+  <ul>
+    <li>Clock</li>
+    <li>Countdown</li>
+    <li>Slider autoplay</li>
+  </ul>
+
+  <h2>🔥 React usage (small demo)</h2>
+
+  <div class="syntax">
+    useEffect(()=>{<br>
+    &nbsp;const id = setInterval(()=>{<br>
+    &nbsp;&nbsp;setCount(prev=>prev+1)<br>
+    &nbsp;},1000)<br><br>
+    &nbsp;return ()=> clearInterval(id)<br><br>
+    },[])
+  </div>
+
+  <h3>Teach:</h3>
+  <p>👉 Component close aagumbothu clear pannanum.</p>
+
+  <h2>7️⃣ Cleanup concept (VERY IMPORTANT)</h2>
+
+  <p>Tamil:</p>
+  <p>Memory leak avoid panna clear pannum.</p>
+
+  <p>English:</p>
+  <p>Cleanup function clears timers.</p>
+
+  <h2>📋 FINAL TEACHING FLOW (tomorrow class)</h2>
+
+  <p>Board la ezhutha:</p>
+
+  <ul>
+    <li>What is setTimeout</li>
+    <li>Syntax</li>
+    <li>Example</li>
+    <li>clearTimeout</li>
+    <li>setInterval</li>
+    <li>clearInterval</li>
+    <li>milliseconds</li>
+    <li>callback</li>
+    <li>real life usage</li>
+    <li>React useEffect example</li>
+    <li>cleanup</li>
+  </ul>
+
+</div>
+
+</body>
+</html>

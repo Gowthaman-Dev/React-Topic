@@ -1,0 +1,315 @@
+🧠 throw new Error() – Teaching Guide
+
+👉 English: Used to manually create and throw an error.
+
+1️⃣ Meaning (Tamil)
+
+👉 throw = thooki podrathu
+👉 Error = thappu / problem
+
+So,
+
+🧠
+Neengale error create panni JS-kitta solrathu.
+
+🔥 Simple Example
+if(age < 18){
+  throw new Error("Not Eligible")
+}
+
+Explain students-ku:
+
+👉 Age 18-kum keezha irundhaa
+👉 program stop
+👉 error message kaatum.
+
+2️⃣ Why use pannrom?
+
+Teach this:
+
+✔ Custom error create panna
+✔ Wrong data stop panna
+✔ Validation fail aagumbodhu
+✔ API error handle panna
+
+3️⃣ Must use with try / catch
+try{
+  throw new Error("Something wrong")
+}catch(err){
+  console.log(err.message)
+}
+
+Tamil:
+
+👉 throw panninaa
+👉 catch pidikkum.
+
+4️⃣ Real Life Example 🧠
+
+Teacher class-la:
+
+Student homework pannala na:
+
+🗣️
+“ERROR! Homework missing!”
+
+👉 Class stop 😄
+
+5️⃣ Async/Await example
+async function getData(){
+ try{
+  if(!email.includes("@")){
+    throw new Error("Invalid Email")
+  }
+ }catch(err){
+  console.log(err.message)
+ }
+}
+
+🔑 One Line Teaching (board la):
+
+Tamil:
+
+👉 throw new Error = manually error create pannrathu.
+
+English:
+
+👉 Throw new Error is used to raise custom errors.
+
+📋 Board Summary
+
+throw
+
+new Error()
+
+custom message
+
+try / catch
+
+stops execution
+
+✅ FINAL:
+
+throw new Error() use panninaa:
+
+✔ execution stop
+✔ error message show
+✔ catch block trigger
+
+----------------------------------------------------------------------------------------------------
+
+🧠 if(!res.ok) – Full Explanation (Teaching Ready)
+
+👉 English: Checks whether API response is successful.
+
+1️⃣ res.ok na enna?
+
+Tamil:
+
+👉 Server correct-aa data kudutha
+👉 res.ok = true
+
+👉 Server problem / 404 / 500 vandhaa
+👉 res.ok = false
+
+Simple example:
+
+Server success → ✅ true
+Server fail → ❌ false
+
+2️⃣ !res.ok na enna?
+
+! = NOT
+
+So:
+
+!res.ok
+
+
+Tamil:
+
+👉 Response correct illa na
+
+3️⃣ Why use pannrom?
+
+Teach students like this:
+
+🧠
+fetch() error throw pannaathu.
+
+Network fail mattum thaan catch pogum.
+
+But API 404 / 500 vandhaalum
+fetch success nu ninaikkum 😱
+
+Athaan:
+
+👉 neengale check pannanum.
+
+🔥 Without res.ok
+const res = await fetch(url)
+const data = await res.json()
+
+
+404 vandhaalum json try pannum → crash 😵
+
+✅ With res.ok
+if(!res.ok){
+ throw new Error("Data Fetching Issue")
+}
+
+
+👉 Problem irundhaa:
+
+✔ manual error
+✔ catch block pogum
+✔ app safe
+
+🧠 Real Life Example
+
+Food order pannunga:
+
+Waiter vandhu sollran:
+
+"Sorry sir, dish illa"
+
+👉 neenga sapduveengala? NO 😄
+
+Athaan res.ok
+
+📋 Teaching Flow (board la)
+API validation steps:
+
+fetch API
+
+check res.ok
+
+if false → throw error
+
+catch handle
+
+🔑 One Line Teaching:
+
+Tamil:
+
+👉 res.ok = server success check.
+
+English:
+
+👉 res.ok verifies HTTP response status.
+
+✅ FINAL ANSWER:
+
+if(!res.ok) use pannrathu:
+
+✔ server error catch panna
+✔ json crash avoid panna
+✔ proper error handling
+
+---------------------------------------------------------------------------------------------
+
+🧠 Topic Name
+useEffect + IIFE
+
+👉 English: Used to run async code inside useEffect.
+
+🔥 STEP 1 — Problem Explain
+
+Students-ku first idha kaamikkanum:
+
+useEffect(async ()=>{
+ const res = await fetch(url)
+},[])
+
+
+❌ WRONG ❌
+
+Explain:
+
+React allow pannaathu.
+
+Because:
+
+👉 useEffect callback async aaga koodaadhu.
+
+STEP 2 — Solution
+
+So inside oru async function create panni call pannanum.
+
+Two ways:
+
+✅ Method 1 — Named Function
+useEffect(()=>{
+ async function fetchData(){
+   const res = await fetch(url)
+ }
+ fetchData()
+},[])
+
+✅ Method 2 — IIFE 🔥
+useEffect(()=>{
+ (async()=>{
+   const res = await fetch(url)
+ })()
+},[])
+
+🧠 IIFE na enna?
+
+Tamil:
+
+👉 Function create pannitu
+👉 same line-la call pannrathu.
+
+Example:
+(()=> console.log("Hi"))()
+
+🔥 Why IIFE use pannrom?
+
+Teach students:
+
+✔ async directly useEffect-la use panna mudiyathu
+✔ Separate function create panna venam
+✔ Short & clean code
+✔ Immediate execution
+
+🧠 Real Life Example
+
+Fan switch on pannitu odane fan start.
+
+Fan switch = function
+Fan start = IIFE
+
+📋 Board Summary
+Flow:
+
+useEffect runs
+
+IIFE runs
+
+async await works
+
+API call
+
+setState
+
+🔑 One Line Teaching:
+
+Tamil:
+
+👉 useEffect-kulla async venumna IIFE use pannuvom.
+
+English:
+
+👉 IIFE allows async execution inside useEffect.
+
+✅ FINAL ANSWER:
+
+useEffect + IIFE use pannrathu:
+
+✔ async allow panna
+✔ code short panna
+✔ immediate run panna
+
+
+-------------------------------------------------------------------------------------------------
+
