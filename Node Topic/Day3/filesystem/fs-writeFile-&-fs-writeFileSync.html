@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Node.js – File Write Topic</title>
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f4f6f8;
+      margin: 0;
+      padding: 20px;
+      line-height: 1.7;
+    }
+
+    .container {
+      max-width: 950px;
+      margin: auto;
+      background: #ffffff;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    .section {
+      margin-bottom: 24px;
+      padding: 16px;
+      border-radius: 10px;
+      background: #f9fbfd;
+      border-left: 6px solid #22c55e;
+    }
+
+    .section h2 {
+      margin-top: 0;
+      font-size: 18px;
+    }
+
+    pre {
+      background: #0f172a;
+      color: #e5e7eb;
+      padding: 12px;
+      border-radius: 8px;
+      overflow-x: auto;
+      white-space: pre-wrap;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+
+    table, th, td {
+      border: 1px solid #d1d5db;
+    }
+
+    th, td {
+      padding: 10px;
+      text-align: left;
+    }
+
+    th {
+      background: #e5e7eb;
+    }
+
+    .task {
+      background: #ecfeff;
+      border-left: 6px solid #06b6d4;
+      padding: 14px;
+      border-radius: 10px;
+      font-weight: bold;
+    }
+
+    ul {
+      margin: 8px 0 0 20px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+
+<h1>Topic: Node.js – File Write (fs.writeFile & fs.writeFileSync)</h1>
+
+<div class="section">
+<h2>1️⃣ Warm-up (5 mins) – Recall + connect</h2>
+
+<p>Students-kitta kelu 👇</p>
+
+<p><strong>Tamil:</strong></p>
+
+<p>“Namma notebook-la already ezhuthina page-la pudhu content ezhuthinaa enna nadakkum?”</p>
+
+<p>👉 Answer:</p>
+<ul>
+<li>Old content poidum / overwrite aagum</li>
+</ul>
+
+<p>💡 Bridge:</p>
+
+<p>“Node.js-la fs.writeFile adhe maadhiri thaan work aagum.”</p>
+</div>
+
+<div class="section">
+<h2>2️⃣ Concept Intro (5 mins)</h2>
+
+<p>Board-la ezhuthu 👇</p>
+
+<pre>File Write = File-la data save pannurathu</pre>
+
+<p><strong>Tamil explain:</strong></p>
+<ul>
+<li>Pudhu file illatti → create pannum</li>
+<li>Irundhaa → old content-a overwrite pannum</li>
+</ul>
+
+<p><strong>English 1-line (students remember panna):</strong></p>
+<ul>
+<li>👉 File write means saving data into a file using Node.js.</li>
+</ul>
+</div>
+
+<div class="section">
+<h2>3️⃣ Setup (5 mins)</h2>
+
+<p>Already node-fs-demo folder use pannalaam.</p>
+
+<ul>
+<li>Step 1: Create JS file</li>
+</ul>
+
+<pre>write.js</pre>
+</div>
+
+<div class="section">
+<h2>4️⃣ fs.writeFile() – Async (MAIN PART) (15 mins)</h2>
+
+<p>Code (type pannitu explain pannunga):</p>
+
+<pre>import fs from 'fs';
+
+fs.writeFile('data.txt', 'Hello Node.js Students!', (err) => {
+  if (err) {
+    console.log("Error:", err);
+    return;
+  }
+  console.log("File written successfully");
+});
+
+console.log("Writing file...");</pre>
+
+<p><strong>Explain line by line (Board):</strong></p>
+
+<ul>
+<li>'data.txt' → file name</li>
+<li>2nd param → content</li>
+<li>callback → success / error</li>
+</ul>
+
+<p>🔥 Demo moment:</p>
+
+<ul>
+<li>File already irundhaa → content change aagum</li>
+<li>File illaatti → auto create aagum</li>
+</ul>
+
+<p>Output order:</p>
+
+<pre>Writing file...
+File written successfully</pre>
+
+<p><strong>Tamil punch line:</strong></p>
+
+<p>“Idhu Async – background-la file write nadakkuthu.”</p>
+</div>
+
+<div class="section">
+<h2>5️⃣ fs.writeFileSync() – Sync (10 mins)</h2>
+
+<p>Code:</p>
+
+<pre>import fs from 'fs';
+
+fs.writeFileSync('sync.txt', 'This is Sync Write');
+console.log("File write completed");</pre>
+
+<p>Explain:</p>
+
+<ul>
+<li>Write mudinja apram thaan next line execute aagum</li>
+<li>Blocking method</li>
+</ul>
+
+<p>Output:</p>
+
+<pre>File write completed</pre>
+</div>
+
+<div class="section">
+<h2>6️⃣ Overwrite Concept – MUST SHOW (5 mins)</h2>
+
+<p>Change content:</p>
+
+<pre>fs.writeFileSync('sync.txt', 'Old data replaced');</pre>
+
+<p><strong>Tamil:</strong></p>
+
+<p>“Paathinga? Old content poiduchu.
+writeFile = overwrite.”</p>
+
+<p>👉 Lead to next topic: appendFile</p>
+</div>
+
+<div class="section">
+<h2>7️⃣ Async vs Sync Comparison (5 mins)</h2>
+
+<table>
+<tr>
+<th>fs.writeFile</th>
+<th>fs.writeFileSync</th>
+</tr>
+<tr>
+<td>Async</td>
+<td>Sync</td>
+</tr>
+<tr>
+<td>Non-blocking</td>
+<td>Blocking</td>
+</tr>
+<tr>
+<td>Callback</td>
+<td>No callback</td>
+</tr>
+<tr>
+<td>Server-ku best</td>
+<td>Practice-ku easy</td>
+</tr>
+</table>
+
+<p>Students-kitta kelu:</p>
+<ul>
+<li>👉 “Server-la edha use pannanum?”</li>
+<li>✔️ fs.writeFile</li>
+</ul>
+</div>
+
+<div class="section">
+<h2>8️⃣ Student Practice (5 mins)</h2>
+
+<div class="task">
+📝 Task:<br><br>
+profile.txt create pannunga<br><br>
+Name + Course write pannunga<br><br>
+fs.writeFile() use pannunga<br><br>
+Bonus question:<br>
+👉 Second time run panninaa enna nadakkum?<br><br>
+(Expected answer: overwrite)
+</div>
+</div>
+
+<div class="section">
+<h2>9️⃣ Interview Tip (2 mins)</h2>
+
+<ul>
+<li>❓ fs.writeFile vs fs.appendFile?</li>
+<li>✔️ writeFile → overwrite</li>
+<li>✔️ appendFile → add content</li>
+</ul>
+
+<p>🧠 Final One-Line (Students note)</p>
+
+<p><strong>Tamil:</strong><br>
+fs.writeFile file create pannum illa overwrite pannum.</p>
+
+<p><strong>English:</strong><br>
+👉 Use writeFile to save or replace file content in Node.js.</p>
+</div>
+
+</div>
+
+</body>
+</html>

@@ -3,8 +3,6 @@ import UserContext from "../ConText/UserContext"
 
 const NavBar = () => {
   const user = useContext(UserContext)
-
-  
   
   return (
     <>

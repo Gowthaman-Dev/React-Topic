@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Node.js – path Module (path.js)</title>
+
+<style>
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    background:#f4f6f8;
+    margin:0;
+    padding:20px;
+    line-height:1.6;
+}
+
+.container{
+    max-width:1000px;
+    margin:auto;
+    background:#ffffff;
+    padding:25px;
+    border-radius:10px;
+    box-shadow:0 0 10px rgba(0,0,0,0.1);
+}
+
+h1{
+    text-align:center;
+    color:#2c3e50;
+    border-bottom:3px solid #3498db;
+    padding-bottom:10px;
+}
+
+.section{
+    margin-top:25px;
+    padding:15px;
+    border-left:6px solid #3498db;
+    background:#f9fbfd;
+    border-radius:6px;
+}
+
+.section h2{
+    color:#34495e;
+    margin-bottom:10px;
+}
+
+.point{
+    margin-left:20px;
+}
+
+.symbol::before{
+    content:"👉 ";
+    font-weight:bold;
+    color:#e67e22;
+}
+
+.task::before{
+    content:"📝 ";
+}
+
+.tip::before{
+    content:"❓ ";
+}
+
+.final::before{
+    content:"🧠 ";
+}
+
+code{
+    background:#eef2f7;
+    padding:3px 6px;
+    border-radius:4px;
+    display:block;
+    margin:8px 0;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Topic: Node.js – path Module (path.js)</h1>
+
+<div class="section">
+<h2>1️⃣ Warm-up (5 mins) – Real life connect</h2>
+
+<p>Students-kitta kelu 👇</p>
+
+<p><b>Tamil:</b></p>
+
+<p>“Windows-la oru file address eppadi irukkum?<br>
+C:\Users\Student\Desktop\file.txt<br>
+Linux-la eppadi irukkum?”</p>
+
+<p class="symbol">Students realise pannuvaanga: OS-ku OS path different</p>
+
+<p>💡 Bridge statement:</p>
+
+<p>“Indha problem-a solve panna thaan Node.js-la path module.”</p>
+</div>
+
+<div class="section">
+<h2>2️⃣ What is path module? (5 mins)</h2>
+
+<p>Board-la ezhuthu 👇</p>
+
+<code>path = File & Folder address handle pannum module</code>
+
+<p><b>Tamil explain:</b></p>
+
+<ul class="point">
+<li>File path-a safe-aa handle pannum</li>
+<li>Windows / Linux difference-a Node manage pannum</li>
+</ul>
+
+<p><b>English 1-line (students remember panna):</b></p>
+
+<p class="symbol">The path module helps to work with file and folder paths in Node.js.</p>
+</div>
+
+<div class="section">
+<h2>3️⃣ Why NOT normal strings? (5 mins)</h2>
+
+<p>Board-la example 👇</p>
+
+<p>❌ Bad way:</p>
+
+<code>"C:/users/data/file.txt"</code>
+
+<p>❌ Problem:</p>
+
+<ul class="point">
+<li>OS change aaginaa error</li>
+<li>Slashes mismatch</li>
+</ul>
+
+<p>✅ Solution:</p>
+
+<p class="symbol">path module</p>
+</div>
+
+<div class="section">
+<h2>4️⃣ Import path module (2 mins)</h2>
+
+<code>import path from 'path';</code>
+
+<p><b>Tamil:</b><br>
+path Node-oda built-in module — install panna vendam.</p>
+</div>
+
+<div class="section">
+<h2>5️⃣ Core path Methods (MAIN PART) (25 mins)</h2>
+
+<h3>1️⃣ path.basename() (5 mins)</h3>
+
+<code>path.basename('/user/files/data.txt');</code>
+
+<p class="symbol">Output:</p>
+<code>data.txt</code>
+
+<p>Tamil:<br>
+Full path-la irundhu file name mattum edukkum.</p>
+
+<hr>
+
+<h3>2️⃣ path.dirname() (5 mins)</h3>
+
+<code>path.dirname('/user/files/data.txt');</code>
+
+<p class="symbol">Output:</p>
+<code>/user/files</code>
+
+<p>Tamil:<br>
+File irukkura folder path edukkum.</p>
+
+<hr>
+
+<h3>3️⃣ path.extname() (5 mins)</h3>
+
+<code>path.extname('image.png');</code>
+
+<p class="symbol">Output:</p>
+<code>.png</code>
+
+<p>Tamil:<br>
+File extension edukkum.</p>
+
+<p class="symbol">Real use:</p>
+
+<ul class="point">
+<li>Image check</li>
+<li>PDF / DOC validation</li>
+</ul>
+
+<hr>
+
+<h3>4️⃣ path.join() 🔥 MOST IMPORTANT (5 mins)</h3>
+
+<code>path.join('users', 'data', 'file.txt');</code>
+
+<p class="symbol">Output:</p>
+<code>users/data/file.txt</code>
+
+<p>Tamil punch line:</p>
+
+<p>“Slash pathiya yosanai vendam — path.join pathiya paathukkum.”</p>
+
+<hr>
+
+<h3>5️⃣ path.resolve() (5 mins)</h3>
+
+<code>path.resolve('files', 'data.txt');</code>
+
+<p class="symbol">Output:</p>
+<code>C:/project/files/data.txt</code>
+
+<p>Tamil:<br>
+Absolute path create pannum.</p>
+
+<hr>
+
+<h3>6️⃣ __dirname & __filename (5 mins)</h3>
+
+<code>
+console.log(__dirname);<br>
+console.log(__filename);
+</code>
+
+<p>Tamil explain:</p>
+
+<ul class="point">
+<li>__dirname → current folder</li>
+<li>__filename → current file</li>
+</ul>
+
+<p>🔥 Combine with path:</p>
+
+<code>path.join(__dirname, 'data.txt');</code>
+
+</div>
+
+<div class="section">
+<h2>7️⃣ path vs fs (Board clarity) (3 mins)</h2>
+
+<table border="1" cellpadding="8">
+<tr>
+<th>Module</th>
+<th>Use</th>
+</tr>
+<tr>
+<td>fs</td>
+<td>File read/write/delete</td>
+</tr>
+<tr>
+<td>path</td>
+<td>File address handle</td>
+</tr>
+</table>
+
+<p><b>Tamil:</b></p>
+
+<p>“fs = work pannum, path = address sollum”</p>
+</div>
+
+<div class="section">
+<h2>8️⃣ Student Practice (5 mins)</h2>
+
+<p class="task">Task:</p>
+
+<ul class="point">
+<li>Oru JS file create pannunga</li>
+<li>__dirname use panni</li>
+<li>notes.txt-ku full path generate pannunga using path.join</li>
+</ul>
+
+<p><b>Bonus:</b></p>
+
+<p class="symbol">File extension print pannunga</p>
+</div>
+
+<div class="section">
+<h2>9️⃣ Interview Tips (3 mins)</h2>
+
+<p class="tip">Why use path module?</p>
+
+<ul class="point">
+<li>OS-independent</li>
+<li>Safe file paths</li>
+<li>Industry standard</li>
+</ul>
+
+<p class="tip">Most used method?</p>
+
+<p class="symbol">path.join()</p>
+
+<p class="final">Final One-Line (Students note)</p>
+
+<p><b>Tamil:</b><br>
+path module file & folder address-a correct-aa handle pannum.</p>
+
+<p><b>English:</b><br>
+<span class="symbol">Use the path module to safely work with file paths in Node.js.</span></p>
+
+</div>
+
+</div>
+</body>
+</html>

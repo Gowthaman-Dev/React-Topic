@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Node.js – File Append Topic</title>
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f4f6f8;
+      margin: 0;
+      padding: 20px;
+      line-height: 1.7;
+    }
+
+    .container {
+      max-width: 950px;
+      margin: auto;
+      background: #ffffff;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    .section {
+      margin-bottom: 24px;
+      padding: 16px;
+      border-radius: 10px;
+      background: #f9fbfd;
+      border-left: 6px solid #f59e0b;
+    }
+
+    .section h2 {
+      margin-top: 0;
+      font-size: 18px;
+    }
+
+    pre {
+      background: #0f172a;
+      color: #e5e7eb;
+      padding: 12px;
+      border-radius: 8px;
+      overflow-x: auto;
+      white-space: pre-wrap;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+
+    table, th, td {
+      border: 1px solid #d1d5db;
+    }
+
+    th, td {
+      padding: 10px;
+      text-align: left;
+    }
+
+    th {
+      background: #e5e7eb;
+    }
+
+    .task {
+      background: #ecfeff;
+      border-left: 6px solid #06b6d4;
+      padding: 14px;
+      border-radius: 10px;
+      font-weight: bold;
+    }
+
+    ul {
+      margin: 8px 0 0 20px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+
+<h1>Topic: Node.js – File Append (fs.appendFile & fs.appendFileSync)</h1>
+
+<div class="section">
+<h2>1️⃣ Warm-up (5 mins) – Recall + contrast</h2>
+
+<p>Students-kitta kelu 👇</p>
+
+<p><strong>Tamil:</strong></p>
+
+<p>“Notebook-la already ezhuthina page-la, last-la innum oru line add panninaa enna nadakkum?”</p>
+
+<p>👉 Answer:</p>
+<ul>
+<li>Old content delete aagathu, new content add aagum</li>
+</ul>
+
+<p>💡 Bridge statement:</p>
+
+<p>“Node.js-la adhe concept-thaan appendFile.”</p>
+</div>
+
+<div class="section">
+<h2>2️⃣ Concept Introduction (5 mins)</h2>
+
+<p>Board-la ezhuthu 👇</p>
+
+<pre>Append = Add content at the end of file</pre>
+
+<p><strong>Tamil explain:</strong></p>
+<ul>
+<li>Old data safe-aa irukkum</li>
+<li>New data last-la add aagum</li>
+</ul>
+
+<p><strong>English 1-line (students remember panna):</strong></p>
+<ul>
+<li>👉 File append means adding new data to an existing file without deleting old data.</li>
+</ul>
+</div>
+
+<div class="section">
+<h2>3️⃣ Setup (5 mins)</h2>
+
+<p>Use same project folder: node-fs-demo</p>
+
+<ul>
+<li>Step 1: Create file</li>
+</ul>
+
+<pre>log.txt
+
+App started</pre>
+</div>
+
+<div class="section">
+<h2>4️⃣ fs.appendFile() – Async (MAIN PART) (15 mins)</h2>
+
+<p>Code (type pannitu explain pannunga):</p>
+
+<pre>import fs from 'fs';
+
+fs.appendFile('log.txt', '\nUser logged in', (err) => {
+  if (err) {
+    console.log("Error:", err);
+    return;
+  }
+  console.log("Data appended successfully");
+});
+
+console.log("Appending data...");</pre>
+
+<p><strong>Line-by-line explanation:</strong></p>
+
+<ul>
+<li>'log.txt' → target file</li>
+<li>\n → new line-la add panna</li>
+<li>callback → success / error</li>
+</ul>
+
+<p>🔥 Demo moment:</p>
+
+<p>👉 File open pannitu show pannunga:</p>
+
+<pre>App started
+User logged in</pre>
+
+<p><strong>Tamil punch line:</strong></p>
+
+<p>“Old content safe-aa irukku. New content mattum add aaguthu.”</p>
+</div>
+
+<div class="section">
+<h2>5️⃣ fs.appendFileSync() – Sync (10 mins)</h2>
+
+<p>Code:</p>
+
+<pre>import fs from 'fs';
+
+fs.appendFileSync('log.txt', '\nUser logged out');
+console.log("Append completed");</pre>
+
+<p>Explain:</p>
+
+<ul>
+<li>File update mudinja apram thaan next line</li>
+<li>Blocking method</li>
+</ul>
+</div>
+
+<div class="section">
+<h2>6️⃣ Write vs Append – MUST Comparison (5 mins)</h2>
+
+<p>Board-la table draw pannunga 👇</p>
+
+<table>
+<tr>
+<th>writeFile</th>
+<th>appendFile</th>
+</tr>
+<tr>
+<td>Old data overwrite</td>
+<td>Old data safe</td>
+</tr>
+<tr>
+<td>Replace content</td>
+<td>Add content</td>
+</tr>
+<tr>
+<td>Notes replace</td>
+<td>Logs add</td>
+</tr>
+</table>
+
+<p><strong>Tamil:</strong></p>
+
+<p>“Logs system-ku eppavum appendFile.”</p>
+</div>
+
+<div class="section">
+<h2>7️⃣ Real-world Use Case (5 mins)</h2>
+
+<p>Explain pannunga 👇</p>
+
+<p>🔥 Where appendFile is used?</p>
+
+<ul>
+<li>Server logs</li>
+<li>Chat messages</li>
+<li>Attendance records</li>
+<li>History tracking</li>
+</ul>
+
+<p>👉 Small example:</p>
+
+<pre>User1 joined
+User2 joined
+User3 joined</pre>
+</div>
+
+<div class="section">
+<h2>8️⃣ Student Practice (5 mins)</h2>
+
+<div class="task">
+📝 Task:<br><br>
+notes.txt file create pannunga<br><br>
+First line: “Day 1: Node.js”<br><br>
+appendFile() use panni “Day 2: File System” add pannunga<br><br>
+Bonus:<br>
+👉 Program-a rendu time run panninaa enna nadakkum?<br><br>
+(Expected: content repeat-aa add aagum)
+</div>
+</div>
+
+<div class="section">
+<h2>9️⃣ Interview Tip (2 mins)</h2>
+
+<ul>
+<li>❓ Difference between writeFile and appendFile?</li>
+<li>✔️ writeFile → overwrite</li>
+<li>✔️ appendFile → add data</li>
+</ul>
+
+<p>🧠 Final One-Line (Students note)</p>
+
+<p><strong>Tamil:</strong><br>
+appendFile use panninaa old content delete aagathu.</p>
+
+<p><strong>English:</strong><br>
+👉 appendFile is used to add data to a file without removing existing content.</p>
+
+</div>
+
+</div>
+
+</body>
+</html>

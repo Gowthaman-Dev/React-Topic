@@ -5,7 +5,6 @@ const App = () => {
     {id:1,name:"Gowtham",age:21,course:"Mern Stack Development"},
     {id:2,name:"Monisha",age:23,course:"Java Stack Development"},
     {id:1,name:"Jerlin",age:26,course:"Python Stack Development"},
-     
   ]
   return (
     <>

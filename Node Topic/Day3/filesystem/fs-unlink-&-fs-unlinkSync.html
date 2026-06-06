@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Node.js FS Topics</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f6f8;
+      margin: 0;
+      padding: 20px;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: auto;
+      background: #ffffff;
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    h1 {
+      text-align: center;
+      color: #2c3e50;
+      margin-bottom: 30px;
+    }
+
+    h2 {
+      color: #34495e;
+      border-left: 6px solid #3498db;
+      padding-left: 10px;
+      margin-top: 30px;
+    }
+
+    .box {
+      background: #f9fbfd;
+      padding: 15px 20px;
+      border-radius: 8px;
+      margin-top: 10px;
+      border: 1px solid #e3e8ee;
+    }
+
+    ul {
+      margin: 10px 0 0 20px;
+    }
+
+    li {
+      margin-bottom: 6px;
+    }
+
+    .highlight {
+      background: #eef6ff;
+      padding: 10px;
+      border-left: 5px solid #2980b9;
+      margin-top: 10px;
+      border-radius: 6px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+
+    table, th, td {
+      border: 1px solid #d0d7de;
+    }
+
+    th, td {
+      padding: 10px;
+      text-align: center;
+    }
+
+    th {
+      background-color: #3498db;
+      color: white;
+    }
+
+    code {
+      display: block;
+      background: #272822;
+      color: #f8f8f2;
+      padding: 12px;
+      border-radius: 6px;
+      margin-top: 10px;
+      white-space: pre-wrap;
+    }
+
+    .final-line {
+      background: #eafaf1;
+      border-left: 5px solid #27ae60;
+      padding: 12px;
+      margin-top: 10px;
+      border-radius: 6px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+
+  <h1>Node.js – File Delete (fs.unlink & fs.unlinkSync)</h1>
+
+  <h2>1️⃣ Warm-up (5 mins) – Real life connect</h2>
+  <div class="box">
+    <p><strong>Students-kitta kelu 👇</strong></p>
+    <p><strong>Tamil:</strong></p>
+    <p>“Namma laptop-la oru file delete panninaa enna nadakkum?”</p>
+    <p>👉 Answer:<br>File system-la irundhu remove aagum</p>
+
+    <div class="highlight">
+      💡 Bridge statement:<br>
+      “Adhe maadhiri Node.js-la fs.unlink use panni file delete pannalaam.”
+    </div>
+  </div>
+
+  <h2>2️⃣ Concept Introduction (5 mins)</h2>
+  <div class="box">
+    <p><strong>Board-la ezhuthu 👇</strong></p>
+    <p><strong>File Delete = System-la irukkura file-a remove pannurathu</strong></p>
+
+    <p><strong>Tamil explain:</strong></p>
+    <ul>
+      <li>File permanent-aa delete aagum</li>
+      <li>Recycle bin concept illa</li>
+    </ul>
+
+    <p><strong>English 1-line (students remember panna):</strong><br>
+    👉 File delete means removing a file from the system using Node.js.</p>
+  </div>
+
+  <h2>3️⃣ Setup (5 mins)</h2>
+  <div class="box">
+    <p>Use same project folder: <strong>node-fs-demo</strong></p>
+    <p><strong>Step 1: Create file</strong></p>
+    <p>temp.txt</p>
+    <p>This file will be deleted</p>
+  </div>
+
+  <h2>4️⃣ fs.unlink() – Async (MAIN PART) (15 mins)</h2>
+  <div class="box">
+    <p><strong>Code (type pannitu explain):</strong></p>
+
+    <code>
+import fs from 'fs';
+
+fs.unlink('temp.txt', (err) => {
+  if (err) {
+    console.log("Error:", err);
+    return;
+  }
+  console.log("File deleted successfully");
+});
+
+console.log("Delete request sent...");
+    </code>
+
+    <p><strong>Line-by-line explanation:</strong></p>
+    <ul>
+      <li>fs.unlink → file delete pannum</li>
+      <li>Callback → success / error</li>
+      <li>Async → background-la work aagum</li>
+    </ul>
+
+    <div class="highlight">
+      🔥 Demo moment:<br>
+      👉 Run pannitu folder open panni kaami<br>
+      👉 temp.txt illa-nu show pannunga
+    </div>
+
+    <p><strong>Tamil punch line:</strong><br>
+    “File instant-aa poiduchu. Undo illa.”</p>
+  </div>
+
+  <h2>5️⃣ fs.unlinkSync() – Sync (10 mins)</h2>
+  <div class="box">
+    <code>
+import fs from 'fs';
+
+fs.unlinkSync('sample.txt');
+console.log("File deleted (Sync)");
+    </code>
+
+    <p><strong>Explain:</strong></p>
+    <ul>
+      <li>File delete mudinja apram thaan next line</li>
+      <li>Blocking method</li>
+    </ul>
+  </div>
+
+  <h2>6️⃣ Async vs Sync Comparison (5 mins)</h2>
+  <div class="box">
+    <table>
+      <tr>
+        <th>fs.unlink</th>
+        <th>fs.unlinkSync</th>
+      </tr>
+      <tr>
+        <td>Async</td>
+        <td>Sync</td>
+      </tr>
+      <tr>
+        <td>Non-blocking</td>
+        <td>Blocking</td>
+      </tr>
+      <tr>
+        <td>Callback</td>
+        <td>No callback</td>
+      </tr>
+      <tr>
+        <td>Server-ku best</td>
+        <td>Practice-ku easy</td>
+      </tr>
+    </table>
+
+    <p><strong>Tamil:</strong><br>
+    “Server apps-la always async delete.”</p>
+  </div>
+
+  <h2>7️⃣ Common Error Teaching (5 mins)</h2>
+  <div class="box">
+    ❌ File illa-na enna nadakkum?<br>
+    <strong>ENOENT: no such file or directory</strong>
+
+    <p><strong>Tamil explain:</strong><br>
+    File irukka-nu check pannina nallaa irukkum.</p>
+
+    <p>👉 Mention:</p>
+    <code>fs.existsSync('file.txt')</code>
+  </div>
+
+  <h2>8️⃣ Real-world Use Cases (5 mins)</h2>
+  <div class="box">
+    <p><strong>Explain pannunga 👇</strong></p>
+
+    <p>🔥 unlink use cases:</p>
+    <ul>
+      <li>Temporary files delete</li>
+      <li>Uploaded file remove</li>
+      <li>Old logs clean pannurathu</li>
+      <li>User delete panna data remove</li>
+    </ul>
+  </div>
+
+  <h2>9️⃣ Student Practice (5 mins)</h2>
+  <div class="box">
+    📝 Task:
+    <ul>
+      <li>delete-me.txt file create pannunga</li>
+      <li>Content ezhuthunga</li>
+      <li>fs.unlink() use panni delete pannunga</li>
+    </ul>
+
+    <p><strong>Bonus:</strong><br>
+    👉 File already delete panninaa enna error varum?</p>
+
+    <p>(Expected: ENOENT)</p>
+  </div>
+
+  <h2>🧠 Interview Tip (2 mins)</h2>
+  <div class="box">
+    ❓ How to delete a file in Node.js?<br>
+    ✔️ Use fs.unlink() or fs.unlinkSync()
+  </div>
+
+  <h2>🧠 Final One-Line (Students note)</h2>
+  <div class="final-line">
+    Tamil:<br>
+    fs.unlink use panni system-la irukkura file-a delete pannalaam.<br><br>
+
+    English:<br>
+    👉 Use fs.unlink to delete files in Node.js.
+  </div>
+
+</div>
+
+</body>
+</html>

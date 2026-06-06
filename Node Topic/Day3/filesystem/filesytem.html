@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Node.js fs Notes</title>
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background-color: #f4f6f8;
+      margin: 0;
+      padding: 20px;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: auto;
+      background: #ffffff;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    .section {
+      margin-bottom: 22px;
+      padding: 15px;
+      border-radius: 10px;
+      background: #f9fbfd;
+      border-left: 6px solid #4a90e2;
+    }
+
+    .section h2 {
+      margin-top: 0;
+      font-size: 18px;
+    }
+
+    pre {
+      background: #0f172a;
+      color: #e5e7eb;
+      padding: 12px;
+      border-radius: 8px;
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+
+    table, th, td {
+      border: 1px solid #d1d5db;
+    }
+
+    th, td {
+      padding: 10px;
+      text-align: left;
+    }
+
+    th {
+      background: #e5e7eb;
+    }
+
+    .summary {
+      background: #ecfeff;
+      border-left: 6px solid #06b6d4;
+      padding: 15px;
+      border-radius: 10px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+
+    <h1>📁 Node.js fs (File System) – Main Concepts</h1>
+
+    <div class="section">
+      <h2>1️⃣ File Read (File-a read pannurathu)</h2>
+      <p><strong>Concepts:</strong></p>
+      <pre>fs.readFile()
+fs.readFileSync()</pre>
+      <p><strong>Tamil:</strong><br>
+      File-la irukkura content-a Node use panni eduthukkurathu.</p>
+      <p><strong>Example idea:</strong><br>
+      Text file open panni data print pannurathu.</p>
+    </div>
+
+    <div class="section">
+      <h2>2️⃣ File Write (File-la write pannurathu)</h2>
+      <p><strong>Concepts:</strong></p>
+      <pre>fs.writeFile()
+fs.writeFileSync()</pre>
+      <p><strong>Tamil:</strong><br>
+      Pudhu file create pannurathu illa existing file-a overwrite pannurathu.</p>
+    </div>
+
+    <div class="section">
+      <h2>3️⃣ File Append (Extra content add pannurathu)</h2>
+      <p><strong>Concepts:</strong></p>
+      <pre>fs.appendFile()
+fs.appendFileSync()</pre>
+      <p><strong>Tamil:</strong><br>
+      Already irukkura file-la content add pannurathu (delete pannama).</p>
+    </div>
+
+    <div class="section">
+      <h2>4️⃣ File Delete (File remove pannurathu)</h2>
+      <p><strong>Concepts:</strong></p>
+      <pre>fs.unlink()
+fs.unlinkSync()</pre>
+      <p><strong>Tamil:</strong><br>
+      System-la irukkura file-a delete pannurathu.</p>
+    </div>
+
+    <div class="section">
+      <h2>5️⃣ Folder / Directory Concepts</h2>
+      <p><strong>Concepts:</strong></p>
+      <pre>fs.mkdir() – folder create
+fs.rmdir() – folder delete
+fs.readdir() – folder-kulla files list
+fs.existsSync() – file/folder irukka-nu check</pre>
+      <p><strong>Tamil:</strong><br>
+      Folders create, delete, list pannurathu.</p>
+    </div>
+
+    <div class="section">
+      <h2>6️⃣ File Info / Stats</h2>
+      <p><strong>Concepts:</strong></p>
+      <pre>fs.stat()
+fs.statSync()</pre>
+      <p><strong>Tamil:</strong><br>
+      File size, created time, file-aa illa folder-aa nu check pannurathu.</p>
+    </div>
+
+    <div class="section">
+      <h2>7️⃣ Rename / Move File</h2>
+      <p><strong>Concept:</strong></p>
+      <pre>fs.rename()</pre>
+      <p><strong>Tamil:</strong><br>
+      File name change pannurathu illa file-a vere location-ku move pannurathu.</p>
+    </div>
+
+    <div class="section">
+      <h2>8️⃣ Async vs Sync (🔥 VERY IMPORTANT)</h2>
+      <table>
+        <tr>
+          <th>Async</th>
+          <th>Sync</th>
+        </tr>
+        <tr>
+          <td>Non-blocking</td>
+          <td>Blocking</td>
+        </tr>
+        <tr>
+          <td>Callback / Promise</td>
+          <td>Wait pannum</td>
+        </tr>
+        <tr>
+          <td>Server-ku best</td>
+          <td>Learning-ku easy</td>
+        </tr>
+      </table>
+      <p><strong>Tamil:</strong><br>
+      Server apps-la Async fs methods use pannanum (performance nalla irukkum).</p>
+    </div>
+
+    <div class="section">
+      <h2>9️⃣ fs Promises (Modern way)</h2>
+      <p><strong>Concept:</strong></p>
+      <pre>import fs from 'fs/promises';</pre>
+      <p><strong>Methods:</strong></p>
+      <pre>fs.readFile()
+fs.writeFile()
+fs.appendFile()</pre>
+      <p><strong>Tamil:</strong><br>
+      Callback avoid panni async/await use pannurathu.</p>
+    </div>
+
+    <div class="section">
+      <h2>1️⃣0️⃣ Streams (Large files)</h2>
+      <p><strong>Concepts:</strong></p>
+      <pre>fs.createReadStream()
+fs.createWriteStream()</pre>
+      <p><strong>Tamil:</strong><br>
+      Periya files (video, logs) memory overload illaama handle pannurathu.</p>
+    </div>
+
+    <div class="summary">
+      🧠 Interview-ku One-Line Summary<br><br>
+      Node.js fs module is used to read, write, update, delete files and manage directories in the server.
+    </div>
+
+  </div>
+
+</body>
+</html>

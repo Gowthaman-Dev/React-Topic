@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Frontend & Backend Interview Notes</title>
+
+<style>
+body{
+  font-family: Arial, Helvetica, sans-serif;
+  background:#f2f6fa;
+  margin:0;
+  padding:20px;
+  line-height:1.6;
+}
+
+.container{
+  max-width:1100px;
+  margin:auto;
+  background:#ffffff;
+  padding:25px;
+  border-radius:10px;
+  box-shadow:0 0 10px rgba(0,0,0,0.1);
+}
+
+h1{
+  text-align:center;
+  margin-bottom:30px;
+  color:#1f2937;
+}
+
+.section{
+  margin-top:30px;
+  padding:20px;
+  border-radius:10px;
+}
+
+.frontend{
+  border-left:8px solid #2563eb;
+  background:#eff6ff;
+}
+
+.backend{
+  border-left:8px solid #16a34a;
+  background:#f0fdf4;
+}
+
+.summary{
+  border-left:8px solid #ef4444;
+  background:#fef2f2;
+}
+
+h2{
+  margin-top:0;
+}
+
+h3{
+  margin-bottom:5px;
+  color:#111827;
+}
+
+p{
+  margin:5px 0;
+}
+
+ul{
+  padding-left:20px;
+}
+
+li{
+  margin-bottom:6px;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  margin-top:10px;
+}
+
+table, th, td{
+  border:1px solid #ccc;
+}
+
+th{
+  background:#111827;
+  color:white;
+  padding:10px;
+}
+
+td{
+  padding:10px;
+}
+
+.code{
+  background:#0f172a;
+  color:#e5e7eb;
+  padding:10px;
+  border-radius:6px;
+  display:inline-block;
+  margin-top:5px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Interview Questions & Answers</h1>
+
+<!-- FRONTEND -->
+
+<div class="section frontend">
+
+<h2>🔵 FRONTEND (React / JS)</h2>
+
+<h3>1️⃣ What are all the hooks you know?</h3>
+
+<p><strong>Answer (English):</strong><br>
+Hooks are functions that let us use state and other React features in functional components.</p>
+
+<p><strong>Tamil:</strong><br>
+Hooks na functional component-ல state, lifecycle, routing மாதிரி features use பண்ண உதவும் functions.</p>
+
+<p><strong>Common Hooks:</strong></p>
+
+<ul>
+<li>🔹 useState – state manage</li>
+<li>🔹 useEffect – lifecycle / side effects</li>
+<li>🔹 useContext – global data sharing</li>
+<li>🔹 useRef – DOM reference</li>
+<li>🔹 useCallback – function optimization</li>
+<li>🔹 useMemo – value optimization</li>
+<li>🔹 useNavigate – routing (React Router)</li>
+</ul>
+
+<h3>2️⃣ Use of Frontend</h3>
+
+<p><strong>Answer (English):</strong><br>
+Frontend is used to create the user interface and interact with users.</p>
+
+<p><strong>Tamil:</strong><br>
+Frontend user பார்க்குற screen, buttons, forms, UI create பண்ண use ஆகும்.</p>
+
+<p><strong>Examples:</strong></p>
+
+<ul>
+<li>🔹 Login page</li>
+<li>🔹 Dashboard</li>
+<li>🔹 Forms</li>
+<li>🔹 Buttons, animations</li>
+</ul>
+
+<h3>3️⃣ Difference between React and JavaScript</h3>
+
+<table>
+<tr>
+<th>JavaScript</th>
+<th>React</th>
+</tr>
+
+<tr>
+<td>Programming language</td>
+<td>JavaScript library</td>
+</tr>
+
+<tr>
+<td>Used for logic</td>
+<td>Used for UI building</td>
+</tr>
+
+<tr>
+<td>DOM manipulation manually</td>
+<td>Virtual DOM</td>
+</tr>
+
+<tr>
+<td>Slow for large apps</td>
+<td>Fast & optimized</td>
+</tr>
+</table>
+
+<p><strong>Tamil:</strong><br>
+JavaScript logic எழுத use ஆகும்.<br>
+React UI easy-ஆ, fast-ஆ build பண்ண use ஆகும்.</p>
+
+<h3>4️⃣ What is CSR (Client Side Rendering)?</h3>
+
+<p><strong>Answer (English):</strong><br>
+CSR means rendering happens in the browser using JavaScript.</p>
+
+<p><strong>Tamil:</strong><br>
+CSR-ல HTML browser-க்கு போன பிறகு JavaScript UI build பண்ணும்.</p>
+
+<p><strong>Example:</strong><br>
+React SPA applications</p>
+
+<h3>5️⃣ How do you pass data to backend?</h3>
+
+<p><strong>Answer (English):</strong><br>
+Data is passed using HTTP requests.</p>
+
+<p><strong>Tamil:</strong><br>
+Frontend-ல இருந்து backend-க்கு data API call மூலம் அனுப்புவோம்.</p>
+
+<p><strong>Methods:</strong></p>
+
+<ul>
+<li>🔹 GET – get data</li>
+<li>🔹 POST – send data</li>
+<li>🔹 PUT – update data</li>
+<li>🔹 DELETE – delete data</li>
+</ul>
+
+<p><strong>Tools:</strong><br>
+fetch, axios</p>
+
+</div>
+
+<!-- BACKEND -->
+
+<div class="section backend">
+
+<h2>🟢 BACKEND (Node.js)</h2>
+
+<h3>1️⃣ What is Node.js?</h3>
+
+<p><strong>Answer (English):</strong><br>
+Node.js is a JavaScript runtime environment used to run JavaScript outside the browser.</p>
+
+<p><strong>Tamil:</strong><br>
+Node.js browser இல்லாம JavaScript run பண்ண உதவும் runtime.</p>
+
+<h3>2️⃣ What are all the imported modules in Node?</h3>
+
+<p><strong>Built-in Modules:</strong></p>
+
+<ul>
+<li>🔹 http – server create</li>
+<li>🔹 fs – file system</li>
+<li>🔹 path – file paths</li>
+<li>🔹 os – system info</li>
+<li>🔹 events – event handling</li>
+</ul>
+
+<p><strong>External Modules:</strong></p>
+
+<ul>
+<li>🔹 express</li>
+<li>🔹 mongoose</li>
+<li>🔹 cors</li>
+<li>🔹 dotenv</li>
+</ul>
+
+<h3>3️⃣ Difference between Node.js and JavaScript</h3>
+
+<table>
+<tr>
+<th>JavaScript</th>
+<th>Node.js</th>
+</tr>
+
+<tr>
+<td>Runs in browser</td>
+<td>Runs on server</td>
+</tr>
+
+<tr>
+<td>Frontend logic</td>
+<td>Backend logic</td>
+</tr>
+
+<tr>
+<td>No file access</td>
+<td>File system access</td>
+</tr>
+</table>
+
+<p><strong>Tamil:</strong><br>
+JavaScript browser-ல run ஆகும்.<br>
+Node.js server-ல run ஆகும்.</p>
+
+<h3>4️⃣ What is Server?</h3>
+
+<p><strong>Answer (English):</strong><br>
+A server is a system that receives requests and sends responses.</p>
+
+<p><strong>Tamil:</strong><br>
+Server client request accept பண்ணி response send பண்ணும்.</p>
+
+<p><strong>Example:</strong><br>
+Browser → Server → Response</p>
+
+<h3>5️⃣ Backend process in Node.js</h3>
+
+<p><strong>Answer (English):</strong><br>
+Backend process handles API, database, authentication, and business logic.</p>
+
+<p><strong>Tamil (Flow):</strong></p>
+
+<ul>
+<li>1️⃣ Client request</li>
+<li>2️⃣ Server receive request</li>
+<li>3️⃣ Logic execute</li>
+<li>4️⃣ Database operation</li>
+<li>5️⃣ Response send to client</li>
+</ul>
+
+<p><strong>Flow:</strong><br>
+Frontend → API → Node Server → Database → Response</p>
+
+</div>
+
+<!-- SUMMARY -->
+
+<div class="section summary">
+
+<h2>🔥 ONE-LINE INTERVIEW SUMMARY</h2>
+
+<ul>
+<li>🔹 Frontend → UI & user interaction</li>
+<li>🔹 React → UI library</li>
+<li>🔹 CSR → Rendering in browser</li>
+<li>🔹 Node.js → Backend runtime</li>
+<li>🔹 Server → Request & response handler</li>
+</ul>
+
+</div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Virtual DOM Guide</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap');
+
+        :root {
+            --bg-body: #f8fafc;       /* Very light gray/white */
+            --bg-card: #ffffff;       /* Pure white */
+            --bg-hover: #f1f5f9;
+            --accent-primary: #3b82f6; /* Blue */
+            --accent-secondary: #0ea5e9; /* Sky Blue */
+            --text-main: #0f172a;     /* Dark Slate */
+            --text-muted: #64748b;    /* Muted Gray */
+            --border: #e2e8f0;
+            --font-main: 'Inter', sans-serif;
+            --font-code: 'JetBrains Mono', monospace;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: var(--font-main);
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        header {
+            padding: 80px 0 60px;
+            text-align: center;
+            background: #ffffff;
+            border-bottom: 1px solid var(--border);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: linear-gradient(to right, #1e293b, var(--accent-primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: var(--accent-primary);
+            font-family: var(--font-code);
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* GRID LAYOUT */
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 24px;
+            padding: 60px 0;
+        }
+
+        /* CARD STYLING */
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 28px;
+            position: relative;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            border-color: var(--accent-primary);
+            box-shadow: 0 10px 25px -5px rgba(59, 130, 246, 0.15);
+        }
+
+        .full-width { grid-column: 1 / -1; }
+
+        /* Card Header */
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .card-index {
+            background: var(--accent-primary);
+            color: white;
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.9rem;
+            flex-shrink: 0;
+        }
+
+        .card-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        /* Card Content */
+        .card-content {
+            color: #334155;
+            font-size: 1rem;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+
+        /* "Simple" Section styling */
+        .simple-box {
+            background: #eff6ff; /* Light blue bg */
+            border-left: 4px solid var(--accent-secondary);
+            padding: 16px;
+            border-radius: 0 8px 8px 0;
+            margin-top: auto;
+        }
+
+        .simple-label {
+            color: var(--accent-secondary);
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            display: block;
+            margin-bottom: 6px;
+        }
+
+        .simple-text {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* Special Styles */
+        .code-snippet {
+            font-family: var(--font-code);
+            color: var(--accent-primary);
+            background: #f1f5f9;
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+
+        /* Process Flow Styling */
+        .process-flow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 10px;
+            padding: 15px;
+            background: #f8fafc;
+            border-radius: 8px;
+            border: 1px dashed var(--border);
+        }
+        
+        .step-bubble {
+            background: white;
+            border: 1px solid var(--accent-primary);
+            color: var(--text-main);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .arrow { color: var(--text-muted); font-weight: bold; }
+
+        /* MEMORY SECTION */
+        .memory-section {
+            background: white;
+            padding: 60px 0;
+            border-top: 1px solid var(--border);
+        }
+
+        .memory-box {
+            border: 2px solid var(--accent-primary);
+            border-radius: 16px;
+            padding: 40px;
+            text-align: center;
+            background: #eff6ff;
+            position: relative;
+            box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.1);
+        }
+
+        .memory-title {
+            position: absolute;
+            top: -16px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: white;
+            padding: 0 24px;
+            color: var(--accent-primary);
+            font-weight: 800;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            border-radius: 20px;
+            border: 1px solid var(--border);
+        }
+
+        .memory-content {
+            font-size: 1.5rem;
+            color: var(--text-main);
+            font-weight: 600;
+            line-height: 1.5;
+        }
+        
+        .highlight { color: var(--accent-primary); background: rgba(59, 130, 246, 0.1); padding: 2px 6px; border-radius: 4px; }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; }
+            .bento-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <div class="subtitle">Core React Concept</div>
+            <h1>🔹 Virtual DOM</h1>
+        </div>
+    </header>
+
+    <section class="container">
+        <div class="bento-grid">
+
+            <!-- 1. Definition -->
+            <article class="card">
+                <div class="card-header">
+                    <div class="card-index">1</div>
+                    <div class="card-title">Definition</div>
+                </div>
+                <div class="card-content">
+                    Virtual DOM is a lightweight copy of the real DOM in React.
+                </div>
+                <div class="simple-box">
+                    <span class="simple-label">👉 Simple</span>
+                    <div class="simple-text">A copy of the real webpage structure in memory.</div>
+                </div>
+            </article>
+
+            <!-- 2. Why we use Virtual DOM? -->
+            <article class="card">
+                <div class="card-header">
+                    <div class="card-index">2</div>
+                    <div class="card-title">Why we use Virtual DOM?</div>
+                </div>
+                <div class="card-content">
+                    We use Virtual DOM to update the UI faster and more efficiently.
+                </div>
+                <div class="simple-box">
+                    <span class="simple-label">👉 Simple</span>
+                    <div class="simple-text">To make UI updates faster.</div>
+                </div>
+            </article>
+
+            <!-- 3. How it works? (Full Width Flow) -->
+            <article class="card full-width">
+                <div class="card-header">
+                    <div class="card-index">3</div>
+                    <div class="card-title">How it works?</div>
+                </div>
+                <div class="card-content">
+                    React first updates the Virtual DOM, then compares it with the previous version, and finally updates only the changed parts in the real DOM.
+                </div>
+                
+                <div class="process-flow">
+                    <div class="step-bubble">Update Virtual DOM</div>
+                    <div class="arrow">→</div>
+                    <div class="step-bubble">Compare Previous</div>
+                    <div class="arrow">→</div>
+                    <div class="step-bubble" style="border-color: var(--accent-secondary); color: var(--accent-secondary);">Update Real DOM</div>
+                </div>
+
+                <div class="simple-box" style="background: white; margin-top: 20px;">
+                    <span class="simple-label">👉 Simple</span>
+                    <div class="simple-text">React updates only the changed part of the UI.</div>
+                </div>
+            </article>
+
+            <!-- 4. Purpose of Virtual DOM -->
+            <article class="card">
+                <div class="card-header">
+                    <div class="card-index">4</div>
+                    <div class="card-title">Purpose</div>
+                </div>
+                <div class="card-content">
+                    The main purpose is to improve performance and avoid full page reloading.
+                </div>
+                <div class="simple-box">
+                    <span class="simple-label">👉 Simple</span>
+                    <div class="simple-text">To make app faster.</div>
+                </div>
+            </article>
+
+            <!-- 5. Key idea -->
+            <article class="card">
+                <div class="card-header">
+                    <div class="card-index">5</div>
+                    <div class="card-title">Key idea</div>
+                </div>
+                <div class="card-content">
+                    Instead of updating the whole page, React updates only necessary parts.
+                </div>
+                <div class="simple-box">
+                    <span class="simple-label">👉 Simple</span>
+                    <div class="simple-text">Only changed UI is updated.</div>
+                </div>
+            </article>
+
+            <!-- 6. Real meaning -->
+            <article class="card">
+                <div class="card-header">
+                    <div class="card-index">6</div>
+                    <div class="card-title">Real meaning</div>
+                </div>
+                <div class="card-content">
+                    Virtual DOM is a faster way to update the UI in React.
+                </div>
+                <div class="simple-box">
+                    <span class="simple-label">👉 Simple</span>
+                    <div class="simple-text">Fast UI updating system.</div>
+                </div>
+            </article>
+
+            <!-- 7. Diffing Algorithm -->
+            <article class="card full-width" style="background: linear-gradient(to bottom, #ffffff, #f0f9ff);">
+                <div class="card-header">
+                    <div class="card-index" style="background: var(--accent-secondary);">7</div>
+                    <div class="card-title">Diffing Algorithm</div>
+                </div>
+                <div class="card-content">
+                    React compares the old Virtual DOM with the new Virtual DOM to find differences.
+                </div>
+                <div class="simple-box">
+                    <span class="simple-label" style="color: var(--accent-primary);">👉 Simple</span>
+                    <div class="simple-text">React checks what changed before updating the screen.</div>
+                </div>
+            </article>
+
+            <!-- 8. Reconciliation -->
+            <article class="card">
+                <div class="card-header">
+                    <div class="card-index">8</div>
+                    <div class="card-title">Reconciliation</div>
+                </div>
+                <div class="card-content">
+                    Reconciliation is the process React uses to compare Virtual DOMs and update the Real DOM.
+                </div>
+                <div class="simple-box">
+                    <span class="simple-label">👉 Simple</span>
+                    <div class="simple-text">React finds changes and updates only those parts.</div>
+                </div>
+            </article>
+
+        </div>
+    </section>
+
+    <!-- MEMORY SECTION -->
+    <div class="memory-section">
+        <div class="container">
+            <div class="memory-box">
+                <span class="memory-title">🔥 Final memory line</span>
+                <div class="memory-content">
+                    Virtual DOM = <span class="highlight">A copy of real DOM</span> used to <span class="highlight">update UI faster</span>.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer style="text-align: center; padding: 30px; color: #94a3b8; font-size: 0.8rem;">
+        <p>Virtual DOM Learning Showcase</p>
+    </footer>
+
+</body>
+</html>

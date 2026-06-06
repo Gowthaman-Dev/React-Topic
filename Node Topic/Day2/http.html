@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Node.js HTTP Server Notes</title>
+
+<style>
+  body{
+    font-family: Arial, Helvetica, sans-serif;
+    background:#f4f6f8;
+    margin:0;
+    padding:20px;
+    line-height:1.6;
+  }
+
+  .container{
+    max-width:1000px;
+    margin:auto;
+    background:#ffffff;
+    padding:25px;
+    border-radius:10px;
+    box-shadow:0 0 10px rgba(0,0,0,0.1);
+  }
+
+  h1{
+    text-align:center;
+    color:#2c3e50;
+    margin-bottom:30px;
+  }
+
+  h2{
+    color:#34495e;
+    border-left:6px solid #3498db;
+    padding-left:10px;
+    margin-top:30px;
+  }
+
+  table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:15px;
+  }
+
+  table, th, td{
+    border:1px solid #ccc;
+  }
+
+  th{
+    background:#3498db;
+    color:white;
+    padding:10px;
+  }
+
+  td{
+    padding:10px;
+  }
+
+  pre{
+    background:#0f172a;
+    color:#e5e7eb;
+    padding:15px;
+    border-radius:8px;
+    overflow-x:auto;
+  }
+
+  .points{
+    margin-top:10px;
+    padding-left:20px;
+  }
+
+  .points li{
+    margin-bottom:8px;
+  }
+
+  .tag{
+    background:#ecf0f1;
+    padding:3px 8px;
+    border-radius:5px;
+    font-size:14px;
+  }
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>📝 Node.js HTTP Server Notes</h1>
+
+<h2>1️⃣ Node.js Modules</h2>
+
+<p>Node.js-ல் modules இரண்டு விதமாக இருக்கலாம்:</p>
+
+<table>
+<tr>
+<th>Type</th>
+<th>Syntax</th>
+<th>Explanation</th>
+</tr>
+
+<tr>
+<td>CommonJS</td>
+<td><span class="tag">const http = require("http");</span></td>
+<td>பழைய Node.js style. Companies இல் still common.</td>
+</tr>
+
+<tr>
+<td>ES Modules (ES6+)</td>
+<td><span class="tag">import http from "http";</span></td>
+<td>Modern JS. import/export பயன்படுத்தலாம்.</td>
+</tr>
+</table>
+
+<p><strong>Export Types:</strong></p>
+
+<p>Named Export</p>
+
+<pre>export const myVar = 10;</pre>
+
+<p>Default Export</p>
+
+<pre>export default app;</pre>
+
+<p><strong>Tamil:</strong></p>
+
+<ul class="points">
+<li>🔹 Named export → ஒரே file-ல் பல values export பண்ணலாம்.</li>
+<li>🔹 Default export → ஒரே value export பண்ணலாம்.</li>
+</ul>
+
+<h2>2️⃣ HTTP Module</h2>
+
+<p>Node.js built-in module.</p>
+<p>Purpose: Server create பண்ண, request handle பண்ண.</p>
+
+<pre>
+const http = require("http"); // CommonJS
+// OR
+import http from "http"; // ES Module
+</pre>
+
+<h2>3️⃣ Create HTTP Server</h2>
+
+<pre>
+const app = http.createServer((req, res) => {
+  res.writeHead(200, { "Content-Type": "text/plain" });
+  res.end("Hello World!");
+});
+
+app.listen(5000, () => {
+  console.log("Server is running on port 5000");
+});
+</pre>
+
+<h3>Step by Step Explanation</h3>
+
+<table>
+<tr>
+<th>Code</th>
+<th>Explanation</th>
+<th>Tamil</th>
+</tr>
+
+<tr>
+<td>http.createServer()</td>
+<td>Creates a server object</td>
+<td>ஒரு HTTP server object உருவாக்கும்</td>
+</tr>
+
+<tr>
+<td>(req, res) => {}</td>
+<td>Callback function for requests</td>
+<td>Request & Response கையாளும் function</td>
+</tr>
+
+<tr>
+<td>res.writeHead(200, {...})</td>
+<td>Send status code & headers</td>
+<td>Response status & type define பண்ணும்</td>
+</tr>
+
+<tr>
+<td>res.end("Hello World!")</td>
+<td>Send response message</td>
+<td>Clientக்கு message அனுப்பும்</td>
+</tr>
+
+<tr>
+<td>app.listen(5000, ...)</td>
+<td>Server start listening on port 5000</td>
+<td>5000 portல் server run ஆகும்</td>
+</tr>
+</table>
+
+<h2>4️⃣ Console Debugging</h2>
+
+<pre>console.log(app);</pre>
+
+<ul class="points">
+<li>🔹 Prints server object for debugging.</li>
+<li>🔹 Useful to know server properties.</li>
+</ul>
+
+<h2>5️⃣ File System (FS Module)</h2>
+
+<p>Node.js-ல் FS module files read/write பண்ண use ஆகும்.</p>
+
+<p><strong>Example:</strong></p>
+
+<pre>
+import fs from "fs";
+
+// Read file
+fs.readFile("example.txt", "utf8", (err, data) => {
+  if (err) throw err;
+  console.log(data);
+});
+</pre>
+
+<p><strong>Tamil:</strong></p>
+
+<ul class="points">
+<li>🔹 FS module → file-ஐ manipulate பண்ண உதவும்.</li>
+</ul>
+
+<h2>6️⃣ Summary / Key Points</h2>
+
+<ul class="points">
+<li>✅ Node.js has built-in modules like http, fs.</li>
+<li>✅ Modules styles: CommonJS (require) vs ES Modules (import/export).</li>
+<li>✅ HTTP server: create → listen → respond.</li>
+<li>✅ Companies use CommonJS for stability, ES Modules for modern JS features.</li>
+</ul>
+
+</div>
+
+</body>
+</html>

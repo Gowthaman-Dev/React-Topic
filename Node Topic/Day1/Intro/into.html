@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Node.js Class Notes</title>
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f4f6f8;
+      margin: 0;
+      padding: 20px;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: auto;
+      background: #ffffff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    h2 {
+      margin-top: 30px;
+      color: #2c3e50;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+
+    table, th, td {
+      border: 1px solid #ccc;
+    }
+
+    th, td {
+      padding: 10px;
+      text-align: left;
+    }
+
+    pre {
+      background: #0f172a;
+      color: #e5e7eb;
+      padding: 15px;
+      border-radius: 8px;
+      overflow-x: auto;
+    }
+
+    .highlight {
+      background: #ecfdf5;
+      padding: 10px;
+      border-left: 5px solid #10b981;
+      margin-top: 10px;
+    }
+
+    .repeat {
+      background: #fff7ed;
+      padding: 15px;
+      border-left: 5px solid #f97316;
+      font-weight: bold;
+      margin-top: 15px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+
+<h1>Node.js</h1>
+
+<h2>1️⃣ Node.js na enna?</h2>
+
+<p><strong>Tamil:</strong><br>
+Node.js oru JavaScript runtime environment.<br>
+Ithu browser illaama JavaScript run panna allow pannuthu.</p>
+
+<p><strong>English (1 line):</strong></p>
+<p>Node.js allows us to run JavaScript outside the browser.</p>
+
+
+<h2>2️⃣ Browser JS vs Node.js JS (Explain on board)</h2>
+
+<table>
+  <tr>
+    <th>Browser</th>
+    <th>Node.js</th>
+  </tr>
+  <tr>
+    <td>DOM access iruku</td>
+    <td>DOM illa</td>
+  </tr>
+  <tr>
+    <td>alert(), window</td>
+    <td>illa</td>
+  </tr>
+  <tr>
+    <td>UI focus</td>
+    <td>Backend focus</td>
+  </tr>
+  <tr>
+    <td>Frontend</td>
+    <td>Server side</td>
+  </tr>
+</table>
+
+
+<h2>3️⃣ Node.js yen use pannrom?</h2>
+
+<ul>
+  <li>👉 Server create panna</li>
+  <li>👉 API build panna</li>
+  <li>👉 Database connect panna</li>
+  <li>👉 File system handle panna</li>
+</ul>
+
+<div class="highlight">
+🗣️ Simple line:<br><br>
+Frontend = React<br>
+Backend = Node.js
+</div>
+
+
+<h2>4️⃣ Node.js oda power 🔥</h2>
+
+<p>🔹 Non-Blocking / Async</p>
+
+<p>
+One time-la 1000 request handle<br>
+Wait pannaama next request process pannum
+</p>
+
+<p><strong>Example:</strong></p>
+
+<pre>
+console.log("Start");
+
+setTimeout(() => {
+  console.log("Middle");
+}, 2000);
+
+console.log("End");
+</pre>
+
+<p><strong>🖥 Output:</strong></p>
+
+<pre>
+Start
+End
+Middle
+</pre>
+
+
+<h2>5️⃣ Core Modules (Must tell)</h2>
+
+<p>Node.js already kudukkura modules:</p>
+
+<ul>
+  <li>http → server</li>
+  <li>fs → file read/write</li>
+  <li>path → file path handle</li>
+  <li>os → system info</li>
+</ul>
+
+
+<h2>6️⃣ Simple Node Server Example</h2>
+
+<pre>
+import http from 'http';
+
+const server = http.createServer((req, res) => {
+  res.end("Hello Node.js");
+});
+
+server.listen(3000, () => {
+  console.log("Server running on port 3000");
+});
+</pre>
+
+
+<h2>7️⃣ Node.js Architecture (Interview gold ⭐)</h2>
+
+<ul>
+  <li>Single Thread</li>
+  <li>Event Loop</li>
+  <li>Non-blocking I/O</li>
+</ul>
+
+<div class="highlight">
+🧠 Simple analogy:<br><br>
+Node.js = One waiter serving many tables without waiting
+</div>
+
+
+<h2>8️⃣ Node.js use pannra companies</h2>
+
+<ul>
+  <li>Netflix</li>
+  <li>PayPal</li>
+  <li>Uber</li>
+  <li>LinkedIn</li>
+</ul>
+
+
+<h2>9️⃣ End class with this line (Make students repeat)</h2>
+
+<div class="repeat">
+Node.js is a JavaScript runtime used to build fast and scalable backend applications.
+</div>
+
+</div>
+
+</body>
+</html>

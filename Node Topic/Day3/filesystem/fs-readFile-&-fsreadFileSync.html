@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Node.js – File Read Topic</title>
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f4f6f8;
+      margin: 0;
+      padding: 20px;
+      line-height: 1.7;
+    }
+
+    .container {
+      max-width: 950px;
+      margin: auto;
+      background: #ffffff;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    .section {
+      margin-bottom: 24px;
+      padding: 16px;
+      border-radius: 10px;
+      background: #f9fbfd;
+      border-left: 6px solid #4a90e2;
+    }
+
+    .section h2 {
+      margin-top: 0;
+      font-size: 18px;
+    }
+
+    pre {
+      background: #0f172a;
+      color: #e5e7eb;
+      padding: 12px;
+      border-radius: 8px;
+      overflow-x: auto;
+      white-space: pre-wrap;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+
+    table, th, td {
+      border: 1px solid #d1d5db;
+    }
+
+    th, td {
+      padding: 10px;
+      text-align: left;
+    }
+
+    th {
+      background: #e5e7eb;
+    }
+
+    .task {
+      background: #ecfeff;
+      border-left: 6px solid #06b6d4;
+      padding: 14px;
+      border-radius: 10px;
+      font-weight: bold;
+    }
+
+    ul {
+      margin: 8px 0 0 20px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+
+<h1>Topic: Node.js – File Read (fs.readFile & fs.readFileSync)</h1>
+
+<div class="section">
+<h2>1️⃣ Warm-up (5 mins) – Real life connect</h2>
+
+<p>👉 Students-kitta first indha question kelu:</p>
+
+<p><strong>Tamil:</strong></p>
+
+<p>“Namma phone-la irukkura notes file open pannumbodhu enna nadakkuthu?”</p>
+
+<p>👉 Expected answer:</p>
+<ul>
+<li>File open → content read → screen-la show</li>
+</ul>
+
+<p>💡 Bridge statement:</p>
+
+<p>“Adhe maadhiri thaan Node.js-la fs module use panni file read pannrom.”</p>
+</div>
+
+<div class="section">
+<h2>2️⃣ Concept Introduction (5 mins)</h2>
+
+<p>Board-la ezhuthu 👇</p>
+
+<pre>fs = File System
+File Read = File-la irukkura data-a eduthukkirathu</pre>
+
+<p><strong>Tamil explain:</strong></p>
+<ul>
+<li>Node.js-ku computer-oda files-a access panna fs module use pannrom.</li>
+</ul>
+
+<p><strong>English 1-line (students remember panna):</strong></p>
+<ul>
+<li>👉 File read means getting data from a file using Node.js.</li>
+</ul>
+</div>
+
+<div class="section">
+<h2>3️⃣ Setup Demo (5 mins)</h2>
+
+<p>Students-kitta sollu 👇</p>
+
+<ul>
+<li>Step 1: Project folder create — <strong>node-fs-demo</strong></li>
+<li>Step 2: File create</li>
+</ul>
+
+<pre>data.txt
+
+Hello Students!
+Welcome to Node.js class</pre>
+</div>
+
+<div class="section">
+<h2>4️⃣ fs.readFile() – Async (MAIN PART) (15 mins)</h2>
+
+<p>Code explain pannitu type pannu 👇</p>
+
+<pre>import fs from 'fs';
+
+fs.readFile('data.txt', 'utf8', (err, data) => {
+  if (err) {
+    console.log("Error:", err);
+    return;
+  }
+  console.log(data);
+});
+
+console.log("File read started...");</pre>
+
+<p><strong>Board explanation (line by line):</strong></p>
+
+<ul>
+<li>fs.readFile → file read pannum</li>
+<li>'utf8' → readable text format</li>
+<li>err → error irundha</li>
+<li>data → file content</li>
+</ul>
+
+<p>🔥 Important demo moment:</p>
+
+<p>👉 Output order-a show pannu:</p>
+
+<pre>File read started...
+Hello Students!
+Welcome to Node.js class</pre>
+
+<p><strong>Tamil punch line:</strong></p>
+
+<p>“Paathinga? File read background-la nadakkuthu. Idhu thaan Async.”</p>
+</div>
+
+<div class="section">
+<h2>5️⃣ fs.readFileSync() – Sync (10 mins)</h2>
+
+<p>Code:</p>
+
+<pre>import fs from 'fs';
+
+const data = fs.readFileSync('data.txt', 'utf8');
+console.log(data);
+
+console.log("File read completed");</pre>
+
+<p>Explain:</p>
+
+<ul>
+<li>readFileSync → wait pannum</li>
+<li>File read mudinja apram thaan next line</li>
+</ul>
+
+<p>Output:</p>
+
+<pre>Hello Students!
+Welcome to Node.js class
+File read completed</pre>
+
+<p><strong>Tamil:</strong></p>
+
+<p>“Idhu blocking method.”</p>
+</div>
+
+<div class="section">
+<h2>6️⃣ Async vs Sync – Blackboard Comparison (5 mins)</h2>
+
+<table>
+<tr>
+<th>fs.readFile</th>
+<th>fs.readFileSync</th>
+</tr>
+<tr>
+<td>Async</td>
+<td>Sync</td>
+</tr>
+<tr>
+<td>Non-blocking</td>
+<td>Blocking</td>
+</tr>
+<tr>
+<td>Callback use</td>
+<td>Direct value</td>
+</tr>
+<tr>
+<td>Server-ku best</td>
+<td>Small scripts</td>
+</tr>
+</table>
+
+<p>👉 Students-kitta kelu:</p>
+<ul>
+<li>“Server-la edha use pannanum?”</li>
+<li>Correct answer: ✅ fs.readFile</li>
+</ul>
+</div>
+
+<div class="section">
+<h2>7️⃣ Student Practice (5 mins)</h2>
+
+<p>Give task 👇</p>
+
+<div class="task">
+📝 Task:<br><br>
+New file create pannunga info.txt<br><br>
+Ungaloda name + course write pannunga<br><br>
+fs.readFile() use panni print pannunga
+</div>
+</div>
+
+<div class="section">
+<h2>8️⃣ Interview Tip (2 mins)</h2>
+
+<p>Students-kitta mugam paathu sollu 😄</p>
+
+<ul>
+<li>❓ Difference between readFile and readFileSync?</li>
+<li>✔️ readFile is async and non-blocking</li>
+<li>✔️ readFileSync is blocking</li>
+</ul>
+
+<p>🧠 Final One-Line (Students note pannum)</p>
+
+<p><strong>Tamil:</strong><br>
+fs.readFile server-la use pannuvom, fs.readFileSync learning-ku use pannuvom.</p>
+
+<p><strong>English:</strong><br>
+👉 Use async file reading in real server applications.</p>
+</div>
+
+</div>
+
+</body>
+</html>

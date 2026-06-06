@@ -1,0 +1,12 @@
+useContext is the hook - to handle global state management occross the all components. usecontext is work like globaly app level data sharing method .
+you can maintain you datas i single file. you can you many files. If you change main data the context will change all the app.
+
+
+
+
+
+
+
+
+
+  

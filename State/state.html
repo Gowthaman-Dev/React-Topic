@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React State Guide</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap');
+
+        :root {
+            --bg-dark: #0f172a;
+            --bg-card: #1e293b;
+            --bg-card-hover: #334155;
+            --accent-primary: #8b5cf6; /* Violet */
+            --accent-secondary: #06b6d4; /* Cyan */
+            --accent-warn: #f59e0b; /* Amber for rules */
+            --text-main: #f1f5f9;
+            --text-muted: #94a3b8;
+            --font-main: 'Inter', sans-serif;
+            --font-code: 'JetBrains Mono', monospace;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: var(--font-main);
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        header {
+            padding: 80px 0 60px;
+            text-align: center;
+            border-bottom: 1px solid #334155;
+            background: radial-gradient(circle at top center, #312e81 0%, var(--bg-dark) 70%);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: linear-gradient(to right, #fff, var(--accent-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: var(--accent-secondary);
+            font-family: var(--font-code);
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* GRID LAYOUT */
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 24px;
+            padding: 60px 0;
+        }
+
+        /* CARD STYLING */
+        .card {
+            background: var(--bg-card);
+            border: 1px solid #334155;
+            border-radius: 12px;
+            padding: 24px;
+            position: relative;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            border-color: var(--accent-primary);
+            box-shadow: 0 10px 30px -10px rgba(139, 92, 246, 0.15);
+        }
+
+        .full-width { grid-column: 1 / -1; }
+
+        /* Card Header */
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 16px;
+        }
+
+        .card-index {
+            background: var(--accent-secondary);
+            color: #000;
+            width: 28px;
+            height: 28px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        .card-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: white;
+            text-transform: capitalize;
+        }
+
+        /* Card Content */
+        .card-content {
+            color: var(--text-main);
+            font-size: 1rem;
+            margin-bottom: 16px;
+            font-weight: 500;
+        }
+
+        /* "Simple" Section styling */
+        .simple-box {
+            background: rgba(255, 255, 255, 0.03);
+            border-left: 3px solid var(--accent-primary);
+            padding: 12px 16px;
+            border-radius: 0 6px 6px 0;
+            margin-top: auto; /* Push to bottom */
+        }
+
+        .simple-label {
+            color: var(--accent-primary);
+            font-size: 0.8rem;
+            font-weight: bold;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .simple-text {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            font-style: italic;
+        }
+
+        /* Special Styles */
+        .code-snippet {
+            font-family: var(--font-code);
+            color: var(--accent-secondary);
+            background: rgba(6, 182, 212, 0.1);
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+        
+        .warn-text {
+            color: var(--accent-warn);
+        }
+
+        /* MEMORY SECTION */
+        .memory-section {
+            background: #1e293b;
+            padding: 60px 0;
+            margin-top: 20px;
+            border-top: 1px solid #334155;
+        }
+
+        .memory-box {
+            border: 2px solid var(--accent-secondary);
+            border-radius: 16px;
+            padding: 40px;
+            text-align: center;
+            background: rgba(6, 182, 212, 0.05);
+            position: relative;
+        }
+
+        .memory-title {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--bg-dark);
+            padding: 0 20px;
+            color: var(--accent-secondary);
+            font-weight: 800;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+        }
+
+        .memory-content {
+            font-size: 1.4rem;
+            color: white;
+            line-height: 1.5;
+        }
+        
+        .highlight { color: var(--accent-secondary); }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; }
+            .bento-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <div class="subtitle">🔹 State Management</div>
+            <h1>Core Concepts</h1>
+        </div>
+    </header>
+
+    <section class="container">
+        <div class="bento-grid">
+
+            <!-- 1. Definition -->
+            <article class="card">
+                <div class="card-header">
+                    <div class="card-index">1</div>
+                    <div class="card-title">Definition</div>
+                </div>
+                <div class="card-content">
+                    State is a feature in React used to store data inside a component.
+                </div>
+                <div class="simple-box">
+                    <span class="simple-label">👉 Simple</span>
+                    <div class="simple-text">Data stored inside a component.</div>
+                </div>
+            </article>
+
+            <!-- 2. Why we use State? -->
+            <article class="card">
+                <div class="card-header">
+                    <div class="card-index">2</div>
+                    <div class="card-title">Why we use State?</div>
+                </div>
+                <div class="card-content">
+                    We use state to store data that can change and update the UI.
+                </div>
+                <div class="simple-box">
+                    <span class="simple-label">👉 Simple</span>
+                    <div class="simple-text">To handle changing data and update UI.</div>
+                </div>
+            </article>
+
+            <!-- 3. Purpose of State -->
+            <article class="card">
+                <div class="card-header">
+                    <div class="card-index">3</div>
+                    <div class="card-title">Purpose of State</div>
+                </div>
+                <div class="card-content">
+                    State is used to make the UI interactive.
+                </div>
+                <div class="simple-box">
+                    <span class="simple-label">👉 Simple</span>
+                    <div class="simple-text">To make UI dynamic and interactive.</div>
+                </div>
+            </article>
+
+            <!-- 4. Mutable nature -->
+            <article class="card">
+                <div class="card-header">
+                    <div class="card-index">4</div>
+                    <div class="card-title">Mutable nature</div>
+                </div>
+                <div class="card-content">
+                    State can be changed using <span class="code-snippet">setState</span> or <span class="code-snippet">useState</span>.
+                </div>
+                <div class="simple-box">
+                    <span class="simple-label">👉 Simple</span>
+                    <div class="simple-text">State value can be changed.</div>
+                </div>
+            </article>
+
+            <!-- 5. Re-render concept (Visual Focus) -->
+            <article class="card full-width" style="background: linear-gradient(to right, #1e293b, #172033);">
+                <div class="card-header">
+                    <div class="card-index">5</div>
+                    <div class="card-title">Re-render concept</div>
+                </div>
+                <div class="card-content" style="display: flex; align-items: center; justify-content: center; gap: 20px; flex-wrap: wrap;">
+                    <span style="color: var(--accent-secondary);">State Changes</span>
+                    <span style="color: white;">→</span>
+                    <span style="color: white;">UI Updates Automatically</span>
+                </div>
+                <div class="simple-box" style="background: transparent; border: none; padding-left: 0;">
+                    <span class="simple-label">👉 Simple</span>
+                    <div class="simple-text">UI updates when state changes.</div>
+                </div>
+            </article>
+
+            <!-- 6. Functional components -->
+            <article class="card">
+                <div class="card-header">
+                    <div class="card-index">6</div>
+                    <div class="card-title">Functional components</div>
+                </div>
+                <div class="card-content">
+                    In functional components, we use <span class="code-snippet">useState</span> to manage state.
+                </div>
+                <div class="simple-box">
+                    <span class="simple-label">👉 Simple</span>
+                    <div class="simple-text">useState is used for state.</div>
+                </div>
+            </article>
+
+            <!-- 7. Component scope -->
+            <article class="card">
+                <div class="card-header">
+                    <div class="card-index">7</div>
+                    <div class="card-title">Component scope</div>
+                </div>
+                <div class="card-content">
+                    State is only available inside the component where it is created.
+                </div>
+                <div class="simple-box">
+                    <span class="simple-label">👉 Simple</span>
+                    <div class="simple-text">State belongs to one component only.</div>
+                </div>
+            </article>
+
+            <!-- 8. Example usage -->
+            <article class="card">
+                <div class="card-header">
+                    <div class="card-index">8</div>
+                    <div class="card-title">Example usage</div>
+                </div>
+                <div class="card-content">
+                    State is used for inputs, forms, counters, and API data.
+                </div>
+                <div class="simple-box">
+                    <span class="simple-label">👉 Simple</span>
+                    <div class="simple-text">Used for user input and dynamic data.</div>
+                </div>
+            </article>
+
+            <!-- 9. Important rule (Warning Style) -->
+            <article class="card full-width" style="border-color: var(--accent-warn);">
+                <div class="card-header">
+                    <div class="card-index" style="background: var(--accent-warn);">9</div>
+                    <div class="card-title" style="color: var(--accent-warn);">Important rule</div>
+                </div>
+                <div class="card-content warn-text" style="font-size: 1.1rem;">
+                    State should not be changed directly.
+                </div>
+                <div class="simple-box" style="border-left-color: var(--accent-warn);">
+                    <span class="simple-label" style="color: var(--accent-warn);">👉 Simple</span>
+                    <div class="simple-text">Do not change state directly.</div>
+                </div>
+            </article>
+
+            <!-- 10. Real meaning -->
+            <article class="card">
+                <div class="card-header">
+                    <div class="card-index">10</div>
+                    <div class="card-title">Real meaning</div>
+                </div>
+                <div class="card-content">
+                    State is data that changes and controls the UI.
+                </div>
+                <div class="simple-box">
+                    <span class="simple-label">👉 Simple</span>
+                    <div class="simple-text">Changing data that controls UI.</div>
+                </div>
+            </article>
+
+        </div>
+    </section>
+
+    <!-- MEMORY SECTION -->
+    <div class="memory-section">
+        <div class="container">
+            <div class="memory-box">
+                <span class="memory-title">🔥 Final memory line</span>
+                <div class="memory-content">
+                    State = <span class="highlight">Data that changes</span> in a component and <span class="highlight">updates the UI</span>.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer style="text-align: center; padding: 30px; color: #475569; font-size: 0.8rem;">
+        <p>React State Learning Showcase</p>
+    </footer>
+
+</body>
+</html>
