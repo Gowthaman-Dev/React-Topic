@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>useEffect – Full Concept | React Hook Complete Guide</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #f1f5f9;
+            font-family: system-ui, 'Segoe UI', 'Roboto', 'Noto Sans', sans-serif;
+            line-height: 1.55;
+            padding: 2rem 1.2rem;
+            color: #0a2a38;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 2rem;
+            box-shadow: 0 25px 45px -12px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            padding: 2rem 2rem 2.5rem 2rem;
+        }
+
+        @media (max-width: 700px) {
+            .container {
+                padding: 1.5rem;
+            }
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #0d4e6e, #1e7e9e);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            border-left: 6px solid #2c9bc2;
+            padding-left: 1.2rem;
+            margin-bottom: 1.2rem;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin: 1.8rem 0 0.75rem 0;
+            padding-bottom: 0.3rem;
+            border-bottom: 3px solid #cde0ec;
+            color: #155f7c;
+        }
+
+        h3 {
+            font-size: 1.45rem;
+            font-weight: 600;
+            margin: 1.3rem 0 0.6rem 0;
+            color: #20759b;
+        }
+
+        .card-note {
+            background: #f9fbfe;
+            border-left: 5px solid #2c8fbb;
+            padding: 1rem 1.2rem;
+            margin: 1rem 0;
+            border-radius: 1rem;
+        }
+
+        .code-block {
+            background: #1e2a32;
+            color: #eef4ff;
+            border-radius: 1rem;
+            padding: 1rem 1.2rem;
+            overflow-x: auto;
+            font-family: 'SF Mono', 'Fira Code', 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            line-height: 1.45;
+            margin: 1rem 0;
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
+
+        .inline-code {
+            background: #eef2f8;
+            font-family: monospace;
+            padding: 0.2rem 0.5rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            color: #0b4b6b;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.2rem 0;
+            background: white;
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+        }
+        th, td {
+            border: 1px solid #cbdde6;
+            padding: 0.8rem 1rem;
+            text-align: left;
+            vertical-align: top;
+        }
+        th {
+            background: #e3f0f7;
+            font-weight: 700;
+            color: #0f506f;
+        }
+
+        .wrong-box {
+            background: #fff4f0;
+            border-left: 4px solid #e15554;
+            padding: 0.8rem 1rem;
+            margin: 0.8rem 0;
+            border-radius: 0.8rem;
+        }
+        .correct-box {
+            background: #f0f9f0;
+            border-left: 4px solid #2e8b57;
+            padding: 0.8rem 1rem;
+            margin: 0.8rem 0;
+            border-radius: 0.8rem;
+        }
+
+        .highlight-memory {
+            background: #fff4e0;
+            padding: 1rem 1.5rem;
+            border-radius: 1.2rem;
+            margin: 1.2rem 0;
+            text-align: center;
+            font-weight: 700;
+            border: 1px solid #ffda99;
+        }
+
+        .flow-step {
+            background: #eef3fc;
+            padding: 0.5rem 1rem;
+            border-radius: 2rem;
+            margin: 0.5rem 0;
+            font-weight: 500;
+        }
+
+        hr {
+            margin: 1.5rem 0;
+            border: none;
+            height: 2px;
+            background: linear-gradient(90deg, #cbe0ed, transparent);
+        }
+
+        footer {
+            margin-top: 2rem;
+            font-size: 0.7rem;
+            text-align: center;
+            color: #5a7f99;
+            border-top: 1px solid #e2edf5;
+            padding-top: 1.2rem;
+        }
+
+        .checklist {
+            background: #fafcfd;
+            border-radius: 1rem;
+            padding: 1rem 1.2rem;
+            border: 1px solid #d4e2ed;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>useEffect FULL CONCEPT (React)</h1>
+
+    <!-- 1️⃣ Definition -->
+    <h2>1️⃣ Definition</h2>
+    <p>👉 useEffect is a React Hook used to handle side effects in functional components after rendering.</p>
+
+    <!-- 2️⃣ Simple Explanation -->
+    <h2>2️⃣ Simple Explanation</h2>
+    <p>👉 Tamil:</p>
+    <p>Component load ஆன பிறகு அல்லது update ஆன பிறகு சில வேலைகள் (API call, timer, DOM update) செய்ய useEffect use pannuvanga.</p>
+    <p>👉 English:</p>
+    <p>useEffect is used to perform side effects like API calls, timers, and DOM updates after the component renders.</p>
+
+    <!-- 3️⃣ Why useEffect? -->
+    <h2>3️⃣ Why useEffect?</h2>
+    <p>👉 React component render aana odane:</p>
+    <ul>
+        <li>API call panna</li>
+        <li>Timer set panna</li>
+        <li>Event listener add panna</li>
+        <li>Data fetch panna</li>
+    </ul>
+    <p>👉 idhellam side effects</p>
+
+    <!-- 4️⃣ Basic Syntax -->
+    <h2>4️⃣ Basic Syntax</h2>
+    <div class="code-block"><code>useEffect(() => {
+  // code here
+});</code></div>
+
+    <!-- 5️⃣ Types of useEffect -->
+    <h2>5️⃣ Types of useEffect (VERY IMPORTANT 🔥)</h2>
+    <h3>🟢 1. Run after EVERY render</h3>
+    <div class="code-block"><code>useEffect(() => {
+  console.log("Runs every time");
+});</code></div>
+    <p>👉 No dependency array → every render</p>
+
+    <h3>🔵 2. Run ONLY ONCE (Component mount)</h3>
+    <div class="code-block"><code>useEffect(() => {
+  console.log("Runs only once");
+}, []);</code></div>
+    <p>👉 Empty dependency array = first time only</p>
+
+    <h3>🟣 3. Run when DEPENDENCY changes</h3>
+    <div class="code-block"><code>useEffect(() => {
+  console.log("Count changed");
+}, [count]);</code></div>
+    <p>👉 count change aana odane run aagum</p>
+
+    <!-- 6️⃣ Real Example (Counter) -->
+    <h2>6️⃣ Real Example (Counter)</h2>
+    <div class="code-block"><code>import { useState, useEffect } from "react";
+
+function Counter() {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    console.log("Count updated:", count);
+  }, [count]);
+
+  return (
+    &lt;div&gt;
+      &lt;h1&gt;{count}&lt;/h1&gt;
+      &lt;button onClick={() =&gt; setCount(count + 1)}&gt;
+        Increase
+      &lt;/button&gt;
+    &lt;/div&gt;
+  );
+}</code></div>
+
+    <!-- 7️⃣ Cleanup Function -->
+    <h2>7️⃣ Cleanup Function (IMPORTANT 🔥)</h2>
+    <p>👉 Used to remove timers, listeners</p>
+    <div class="code-block"><code>useEffect(() => {
+  const timer = setInterval(() => {
+    console.log("Running...");
+  }, 1000);
+
+  return () => {
+    clearInterval(timer);
+  };
+}, []);</code></div>
+    <p>🧠 Meaning:</p>
+    <p>👉 Component remove aagumbodhu cleanup run aagum</p>
+
+    <!-- 8️⃣ Real Use Cases -->
+    <h2>8️⃣ Real Use Cases</h2>
+    <ul>
+        <li>✔ API calls</li>
+        <li>✔ Timer / Interval</li>
+        <li>✔ Event listeners</li>
+        <li>✔ Data fetching</li>
+        <li>✔ Local storage sync</li>
+    </ul>
+
+    <!-- 9️⃣ useEffect Flow -->
+    <h2>9️⃣ useEffect Flow (VERY IMPORTANT)</h2>
+    <p>👉 React lifecycle flow:</p>
+    <div class="code-block"><code>Component render
+UI update
+useEffect runs
+Cleanup (if needed)</code></div>
+
+    <!-- 🔟 useEffect vs useState -->
+    <h2>🔟 useEffect vs useState</h2>
+    <table>
+        <thead><tr><th>useState</th><th>useEffect</th></tr></thead>
+        <tbody>
+            <tr><td>Stores data</td><td>Runs side effects</td>
+            <tr><td>Changes UI</td><td>Does tasks after render</td>
+            <tr><td>Internal memory</td><td>External actions</td>
+        </tbody>
+    </table>
+
+    <!-- 🧠 Memory Trick -->
+    <h2>🧠 Memory Trick</h2>
+    <div class="highlight-memory">👉 State = Data store<br/>👉 Effect = Work after render</div>
+
+    <!-- 🚀 Interview Answer -->
+    <h2>🚀 Interview Answer (PERFECT)</h2>
+    <div class="card-note">👉 “useEffect is a React Hook used to perform side effects in functional components. It runs after rendering and is used for tasks like API calls, timers, and DOM updates. It can run on every render, only once using an empty dependency array, or when specific dependencies change. It also supports cleanup functions to remove side effects when the component unmounts.”</div>
+
+    <!-- 💡 One-line Summary -->
+    <h2>💡 One-line Summary</h2>
+    <p>👉 useEffect is used to handle side effects after component render.</p>
+
+    <hr>
+
+    <!-- ========== Missing Concept ========== -->
+    <h2 style="color:#c4450c;">Missing Concept</h2>
+
+    <!-- 1️⃣ Dependency Array Deep Understanding -->
+    <h3>1️⃣ Dependency Array Deep Understanding</h3>
+    <p>You mentioned the 3 types, but add this explanation:</p>
+    <p><strong>No Dependency Array</strong></p>
+    <div class="code-block"><code>useEffect(() => {
+  console.log("Runs every render");
+});</code></div>
+    <p>Runs:<br/>✅ Initial Render<br/>✅ Every Re-render</p>
+    <p><strong>Empty Dependency Array</strong></p>
+    <div class="code-block"><code>useEffect(() => {
+  console.log("Runs once");
+}, []);</code></div>
+    <p>Runs:<br/>✅ Only on Mount</p>
+    <p><strong>Dependency Array</strong></p>
+    <div class="code-block"><code>useEffect(() => {
+  console.log("Count Changed");
+}, [count]);</code></div>
+    <p>Runs:<br/>✅ Initial Render<br/>✅ Whenever count changes</p>
+
+    <!-- 2️⃣ Component Lifecycle Mapping -->
+    <h3>2️⃣ Component Lifecycle Mapping</h3>
+    <p><strong>Very Important Interview Question 🔥</strong></p>
+    <p><strong>Class Component</strong><br/>componentDidMount()<br/>componentDidUpdate()<br/>componentWillUnmount()</p>
+    <p><strong>useEffect Equivalent</strong></p>
+    <div class="code-block"><code>useEffect(() => {}, []);</code></div>
+    <p>≈ componentDidMount</p>
+    <div class="code-block"><code>useEffect(() => {}, [count]);</code></div>
+    <p>≈ componentDidUpdate</p>
+    <div class="code-block"><code>useEffect(() => {
+  return () => {};
+}, []);</code></div>
+    <p>≈ componentWillUnmount</p>
+
+    <!-- 3️⃣ Cleanup Function Runs When? -->
+    <h3>3️⃣ Cleanup Function Runs When?</h3>
+    <p>Most people think only on unmount.<br/>Not fully correct.</p>
+    <div class="code-block"><code>useEffect(() => {
+  console.log("Effect");
+
+  return () => {
+    console.log("Cleanup");
+  };
+}, [count]);</code></div>
+    <p>Flow:</p>
+    <div class="code-block"><code>Effect Runs
+      ↓
+count changes
+      ↓
+Cleanup Runs
+      ↓
+Effect Runs Again</code></div>
+    <p><strong>Interview Answer</strong><br/>Cleanup runs:<br/>✅ Before unmount<br/>✅ Before the next effect execution</p>
+
+    <!-- 4️⃣ API Call Example -->
+    <h3>4️⃣ API Call Example</h3>
+    <p>Most common use case.</p>
+    <div class="code-block"><code>useEffect(() => {
+  fetch("/users")
+    .then((res) =&gt; res.json())
+    .then((data) =&gt; {
+      console.log(data);
+    });
+}, []);</code></div>
+    <p>Why []<br/>Only fetch once.</p>
+
+    <!-- 5️⃣ Multiple Dependencies -->
+    <h3>5️⃣ Multiple Dependencies</h3>
+    <div class="code-block"><code>useEffect(() => {
+  console.log("Changed");
+}, [count, name]);</code></div>
+    <p>Runs when:<br/>✅ count changes<br/>OR<br/>✅ name changes</p>
+
+    <!-- 6️⃣ Missing Dependency Problem -->
+    <h3>6️⃣ Missing Dependency Problem</h3>
+    <p><strong>Very Important 🔥</strong></p>
+    <div class="code-block"><code>useEffect(() => {
+  console.log(count);
+}, []);</code></div>
+    <p>But using:<br/><span class="inline-code">count</span> inside effect.</p>
+    <p>Problem<br/>Effect may use stale values.</p>
+    <p><strong>Fix</strong></p>
+    <div class="code-block"><code>useEffect(() => {
+  console.log(count);
+}, [count]);</code></div>
+    <p><strong>Interview Point</strong><br/>Always include dependencies used inside the effect.</p>
+
+    <!-- 7️⃣ Infinite Loop Problem -->
+    <h3>7️⃣ Infinite Loop Problem</h3>
+    <p><strong>Interview Favorite 🔥</strong></p>
+    <div class="wrong-box"><strong>❌ Wrong</strong><br/><code>useEffect(() => {
+  setCount(count + 1);
+});</code></div>
+    <p>Flow:</p>
+    <div class="code-block"><code>Render
+ ↓
+Effect
+ ↓
+setCount
+ ↓
+Render
+ ↓
+Effect
+ ↓
+Infinite Loop</code></div>
+    <p><strong>Fix</strong><br/>Use dependency array carefully.</p>
+
+    <!-- 8️⃣ Multiple useEffects -->
+    <h3>8️⃣ Multiple useEffects</h3>
+    <p>React allows multiple effects.</p>
+    <div class="code-block"><code>useEffect(() => {
+  console.log("API");
+}, []);
+
+useEffect(() => {
+  console.log("Timer");
+}, []);
+
+useEffect(() => {
+  console.log("Analytics");
+}, []);</code></div>
+    <p><strong>Benefit</strong><br/>Separate concerns.</p>
+
+    <!-- 9️⃣ useEffect Execution Order -->
+    <h3>9️⃣ useEffect Execution Order</h3>
+    <div class="code-block"><code>function App() {
+  console.log("Render");
+
+  useEffect(() => {
+    console.log("Effect");
+  });
+
+  return &lt;h1&gt;Hello&lt;/h1&gt;;
+}</code></div>
+    <p>Output:</p>
+    <div class="code-block"><code>Render
+Effect</code></div>
+    <p><strong>Interview Point</strong><br/>useEffect runs after render.</p>
+
+    <!-- 🔟 Common Side Effects -->
+    <h3>🔟 Common Side Effects</h3>
+    <p>Examples:</p>
+    <ul>
+        <li>✅ API Calls</li>
+        <li>✅ Timers</li>
+        <li>✅ setInterval</li>
+        <li>✅ Event Listeners</li>
+        <li>✅ Local Storage</li>
+        <li>✅ Document Title</li>
+        <li>✅ Subscriptions</li>
+    </ul>
+
+    <!-- 1️⃣1️⃣ useEffect for Document Title -->
+    <h3>1️⃣1️⃣ useEffect for Document Title</h3>
+    <div class="code-block"><code>useEffect(() => {
+  document.title =
+    `Count ${count}`;
+}, [count]);</code></div>
+    <p>Real-world example.</p>
+
+    <!-- 1️⃣2️⃣ useEffect with Event Listener -->
+    <h3>1️⃣2️⃣ useEffect with Event Listener</h3>
+    <div class="code-block"><code>useEffect(() => {
+  window.addEventListener(
+    "resize",
+    handleResize
+  );
+
+  return () => {
+    window.removeEventListener(
+      "resize",
+      handleResize
+    );
+  };
+}, []);</code></div>
+    <p><strong>Why Cleanup?</strong><br/>Avoid memory leaks.</p>
+
+    <!-- 1️⃣3️⃣ Memory Leak Concept -->
+    <h3>1️⃣3️⃣ Memory Leak Concept</h3>
+    <p>Without cleanup:</p>
+    <div class="code-block"><code>setInterval()
+addEventListener()</code></div>
+    <p>continue running.</p>
+    <p>Result<br/>❌ Memory Leak</p>
+    <p><strong>Solution</strong></p>
+    <div class="code-block"><code>return () => {
+  // cleanup
+};</code></div>
+
+    <!-- 🎯 Important Interview Questions -->
+    <h2>🎯 Important Interview Questions</h2>
+    <p><strong>Q1. What is useEffect?</strong><br/>👉 Hook used for side effects.</p>
+    <p><strong>Q2. When does useEffect run?</strong><br/>👉 After component renders.</p>
+    <p><strong>Q3. What does [] mean?</strong><br/>👉 Run only once after mount.</p>
+    <p><strong>Q4. What is cleanup function?</strong><br/>👉 Function that removes side effects.</p>
+    <p><strong>Q5. Can we have multiple useEffects?</strong><br/>👉 Yes.</p>
+    <p><strong>Q6. What causes infinite loops?</strong><br/>👉 Updating state inside useEffect without proper dependencies.</p>
+
+    <!-- Final Checklist ✅ -->
+    <h2>Final Checklist ✅</h2>
+    <div class="checklist">
+        <p><strong>You already have:</strong></p>
+        <p>✅ Definition &nbsp; ✅ Why useEffect &nbsp; ✅ Basic Syntax &nbsp; ✅ 3 Dependency Types &nbsp; ✅ Counter Example &nbsp; ✅ Cleanup Function &nbsp; ✅ Use Cases &nbsp; ✅ useState vs useEffect</p>
+        <p><strong>Add:</strong></p>
+        <p>✅ Lifecycle Mapping &nbsp; ✅ Cleanup Before Re-run &nbsp; ✅ Multiple Dependencies &nbsp; ✅ Missing Dependency Issue &nbsp; ✅ Infinite Loop Problem &nbsp; ✅ Multiple useEffects &nbsp; ✅ API Call Example &nbsp; ✅ Event Listener Example &nbsp; ✅ Document Title Example &nbsp; ✅ Memory Leak Concept &nbsp; ✅ Execution Order &nbsp; ✅ Interview Questions</p>
+    </div>
+
+    <footer>📘 useEffect – Full Concept · every definition, example, missing concept and interview answer preserved word‑for‑word. No JavaScript, pure HTML/CSS reference.</footer>
+</div>
+</body>
+</html>
