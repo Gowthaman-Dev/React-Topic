@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>useMemo – FULL CONCEPT | React Performance Hook</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #f0f4fa;
+            font-family: system-ui, 'Segoe UI', 'Roboto', 'Noto Sans', sans-serif;
+            line-height: 1.55;
+            padding: 2rem 1.2rem;
+            color: #0a2a38;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 2rem;
+            box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+            padding: 2rem 2rem 2.5rem 2rem;
+        }
+
+        @media (max-width: 700px) {
+            .container {
+                padding: 1.5rem;
+            }
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #1a5f7a, #2680a6);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            border-left: 6px solid #2c9bc2;
+            padding-left: 1.2rem;
+            margin-bottom: 1.2rem;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin: 1.8rem 0 0.75rem 0;
+            padding-bottom: 0.3rem;
+            border-bottom: 3px solid #cde0ec;
+            color: #155f7c;
+        }
+
+        h3 {
+            font-size: 1.45rem;
+            font-weight: 600;
+            margin: 1.3rem 0 0.6rem 0;
+            color: #20759b;
+        }
+
+        .card-note {
+            background: #f9fbfe;
+            border-left: 5px solid #2c8fbb;
+            padding: 1rem 1.2rem;
+            margin: 1rem 0;
+            border-radius: 1rem;
+        }
+
+        .code-block {
+            background: #1e2a32;
+            color: #eef4ff;
+            border-radius: 1rem;
+            padding: 1rem 1.2rem;
+            overflow-x: auto;
+            font-family: 'SF Mono', 'Fira Code', 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            line-height: 1.45;
+            margin: 1rem 0;
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
+
+        .inline-code {
+            background: #eef2f8;
+            font-family: monospace;
+            padding: 0.2rem 0.5rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            color: #0b4b6b;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.2rem 0;
+            background: white;
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+        }
+        th, td {
+            border: 1px solid #cbdde6;
+            padding: 0.8rem 1rem;
+            text-align: left;
+            vertical-align: top;
+        }
+        th {
+            background: #e3f0f7;
+            font-weight: 700;
+            color: #0f506f;
+        }
+
+        .wrong-box {
+            background: #fff4f0;
+            border-left: 4px solid #e15554;
+            padding: 0.8rem 1rem;
+            margin: 0.8rem 0;
+            border-radius: 0.8rem;
+        }
+        .correct-box {
+            background: #f0f9f0;
+            border-left: 4px solid #2e8b57;
+            padding: 0.8rem 1rem;
+            margin: 0.8rem 0;
+            border-radius: 0.8rem;
+        }
+
+        .highlight-memory {
+            background: #fff4e0;
+            padding: 1rem 1.5rem;
+            border-radius: 1.2rem;
+            margin: 1.2rem 0;
+            text-align: center;
+            font-weight: 700;
+            border: 1px solid #ffda99;
+        }
+
+        hr {
+            margin: 1.5rem 0;
+            border: none;
+            height: 2px;
+            background: linear-gradient(90deg, #cbe0ed, transparent);
+        }
+
+        footer {
+            margin-top: 2rem;
+            font-size: 0.7rem;
+            text-align: center;
+            color: #5a7f99;
+            border-top: 1px solid #e2edf5;
+            padding-top: 1.2rem;
+        }
+
+        .checklist {
+            background: #fafcfd;
+            border-radius: 1rem;
+            padding: 1rem 1.2rem;
+            border: 1px solid #d4e2ed;
+        }
+        .badge-fire {
+            background: #f97316;
+            color: white;
+            font-size: 0.7rem;
+            border-radius: 30px;
+            padding: 0.2rem 0.7rem;
+            display: inline-block;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>useMemo – FULL CONCEPT (React)</h1>
+
+    <!-- 1️⃣ Definition -->
+    <h2>1️⃣ Definition</h2>
+    <p>👉 useMemo is a React Hook used to memoize (cache) the result of an expensive computation so that it is not recalculated on every render.</p>
+
+    <!-- 2️⃣ Simple Explanation -->
+    <h2>2️⃣ Simple Explanation</h2>
+    <p>👉 Tamil:</p>
+    <p>Oru heavy calculation irundha, adha every render-la repeat pannaama save panni vechukradhu useMemo.</p>
+    <p>👉 English:</p>
+    <p>useMemo caches the result of a calculation and only recalculates when dependencies change.</p>
+
+    <!-- 3️⃣ Why useMemo? -->
+    <h2>3️⃣ Why useMemo?</h2>
+    <p>👉 React re-render aana odane:</p>
+    <p>Heavy calculations repeat aagum ❌<br/>Performance slow aagum ❌</p>
+    <p>👉 useMemo solve pannum:</p>
+    <p>✔ Avoid unnecessary calculations<br/>✔ Improve performance<br/>✔ Faster UI</p>
+
+    <!-- 4️⃣ Syntax -->
+    <h2>4️⃣ Syntax</h2>
+    <div class="code-block"><code>import { useMemo } from "react";
+
+const result = useMemo(() => {
+  return expensiveCalculation();
+}, [dependency]);</code></div>
+
+    <!-- 5️⃣ Basic Example -->
+    <h2>5️⃣ Basic Example</h2>
+    <div class="code-block"><code>import { useMemo, useState } from "react";
+
+function App() {
+  const [count, setCount] = useState(0);
+
+  const doubleValue = useMemo(() => {
+    console.log("Calculating...");
+    return count * 2;
+  }, [count]);
+
+  return (
+    &lt;div&gt;
+      &lt;h1&gt;Count: {count}&lt;/h1&gt;
+      &lt;h2&gt;Double: {doubleValue}&lt;/h2&gt;
+
+      &lt;button onClick={() =&gt; setCount(count + 1)}&gt;
+        Increase
+      &lt;/button&gt;
+    &lt;/div&gt;
+  );
+}</code></div>
+    <p>🧠 Meaning:<br/>count change aana → recalculation<br/>same value → cached result use</p>
+
+    <!-- 6️⃣ Without useMemo (Problem) -->
+    <h2>6️⃣ Without useMemo (Problem)</h2>
+    <div class="code-block"><code>const result = expensiveCalculation();</code></div>
+    <p>👉 Every render:</p>
+    <p>function runs again ❌<br/>performance slow ❌</p>
+
+    <!-- 7️⃣ With useMemo (Solution) -->
+    <h2>7️⃣ With useMemo (Solution)</h2>
+    <div class="code-block"><code>const result = useMemo(() => expensiveCalculation(), []);</code></div>
+    <p>👉 Only first render → calculation happens</p>
+
+    <!-- 8️⃣ When useMemo runs? -->
+    <h2>8️⃣ When useMemo runs?</h2>
+    <p>👉 Depends on dependency array:</p>
+    <table>
+        <thead><tr><th>Case</th><th>Behaviour</th></tr></thead>
+        <tbody>
+            <tr><td>[]</td><td>runs once</td>
+            <tr><td>[value]</td><td>runs when value changes</td>
+            <tr><td>no dependency</td><td>runs every render</td>
+        </tbody>
+    </table>
+
+    <!-- 9️⃣ Real-Life Example -->
+    <h2>9️⃣ Real-Life Example</h2>
+    <p>👉 Imagine:</p>
+    <ul>
+        <li>Big list sorting</li>
+        <li>Filtering 10,000 items</li>
+        <li>Complex math calculation</li>
+    </ul>
+    <p>👉 Without useMemo → slow<br/>👉 With useMemo → fast</p>
+
+    <!-- 🔟 Example: Filter List -->
+    <h2>🔟 Example: Filter List</h2>
+    <div class="code-block"><code>import { useMemo, useState } from "react";
+
+function App() {
+  const [search, setSearch] = useState("");
+
+  const users = ["Rocky", "John", "Alex", "Sam"];
+
+  const filteredUsers = useMemo(() => {
+    console.log("Filtering...");
+    return users.filter((u) =>
+      u.toLowerCase().includes(search.toLowerCase())
+    );
+  }, [search]);
+
+  return (
+    &lt;div&gt;
+      &lt;input
+        value={search}
+        onChange={(e) =&gt; setSearch(e.target.value)}
+      /&gt;
+
+      {filteredUsers.map((u) => (
+        &lt;p key={u}&gt;{u}&lt;/p&gt;
+      ))}
+    &lt;/div&gt;
+  );
+}</code></div>
+
+    <!-- 1️⃣1️⃣ useMemo vs useEffect (IMPORTANT 🔥) -->
+    <h2>1️⃣1️⃣ useMemo vs useEffect (IMPORTANT 🔥)</h2>
+    <table>
+        <thead><tr><th>useMemo</th><th>useEffect</th></tr></thead>
+        <tbody>
+            <tr><td>Returns value</td><td>Performs side effects</td>
+            <tr><td>Caches result</td><td>Runs after render</td>
+            <tr><td>Performance optimization</td><td>API calls, DOM updates</td>
+            <tr><td>Used in render phase</td><td>Runs after render</td>
+        </tbody>
+    </table>
+    <p>🧠 Memory Trick</p>
+    <div class="highlight-memory">👉 useMemo = Remember calculation result</div>
+
+    <!-- 1️⃣2️⃣ When to use useMemo? -->
+    <h2>1️⃣2️⃣ When to use useMemo?</h2>
+    <p>✔ Heavy calculations<br/>✔ Large list filtering<br/>✔ Sorting data<br/>✔ Performance optimization</p>
+    <p>❌ When NOT to use?<br/>Small calculations<br/>Simple values<br/>Overusing causes complexity</p>
+
+    <!-- 🚀 Interview Answer (PERFECT) -->
+    <h2>🚀 Interview Answer (PERFECT)</h2>
+    <div class="card-note">👉 useMemo is a React Hook used to memoize the result of an expensive computation. It helps optimize performance by preventing unnecessary recalculations on every render. It only recalculates the value when the dependencies change. It is mainly used for heavy computations like filtering, sorting, or complex calculations.</div>
+
+    <!-- 💡 One-Line Summary -->
+    <h2>💡 One-Line Summary</h2>
+    <p>👉 useMemo caches the result of a calculation and avoids unnecessary re-computation.</p>
+
+    <hr>
+
+    <!-- ========== missing ========== -->
+    <h2 style="color:#c4450c;">missing</h2>
+
+    <!-- 1️⃣ useMemo Returns a Value (Important) -->
+    <h3>1️⃣ useMemo Returns a Value (Important)</h3>
+    <p>Many beginners confuse useMemo and useEffect.</p>
+    <div class="code-block"><code>const result = useMemo(() => {
+  return count * 2;
+}, [count]);</code></div>
+    <p>🧠 Remember:</p>
+    <p>useMemo → returns a value ✅<br/>useEffect → returns nothing (or cleanup function) ✅</p>
+
+    <!-- 2️⃣ Dependency Array Importance -->
+    <h3>2️⃣ Dependency Array Importance</h3>
+    <div class="code-block"><code>const total = useMemo(() => {
+  return price * quantity;
+}, [price, quantity]);</code></div>
+    <p>If dependency changes:</p>
+    <p>✅ Recalculate</p>
+    <p>If dependency doesn't change:</p>
+    <p>✅ Use cached value</p>
+
+    <!-- 3️⃣ useMemo Execution Flow -->
+    <h3>3️⃣ useMemo Execution Flow</h3>
+    <div class="code-block"><code>First Render
+useMemo(() => {
+  console.log("Run");
+  return count * 2;
+}, [count]);
+
+Output:
+
+Run
+Re-render without count change
+No Run
+count changes
+Run</code></div>
+    <p>🧠 Flow:</p>
+    <p>Render → Check Dependency → Return Cached Value OR Recalculate</p>
+
+    <!-- 4️⃣ useMemo + React.memo 🔥🔥 -->
+    <h3>4️⃣ useMemo + React.memo 🔥🔥</h3>
+    <p>Very Important Interview Question</p>
+    <div class="code-block"><code>const filteredUsers = useMemo(() => {
+  return users.filter(user => user.active);
+}, [users]);
+
+&lt;Child users={filteredUsers} /&gt;</code></div>
+    <p>Usually used with:</p>
+    <p>React.memo()</p>
+    <p>Purpose:</p>
+    <p>useMemo → memoize value<br/>React.memo → memoize component</p>
+    <p>Together improve performance.</p>
+
+    <!-- 5️⃣ useMemo for Object Reference -->
+    <h3>5️⃣ useMemo for Object Reference</h3>
+    <p>Without useMemo:</p>
+    <div class="code-block"><code>const person = {
+  name: "Gowtham",
+};</code></div>
+    <p>Every render:</p>
+    <p>❌ New object created</p>
+    <p>With useMemo:</p>
+    <div class="code-block"><code>const person = useMemo(() => {
+  return {
+    name: "Gowtham",
+  };
+}, []);</code></div>
+    <p>✅ Same object reference reused</p>
+
+    <!-- 6️⃣ useMemo for Array Reference -->
+    <h3>6️⃣ useMemo for Array Reference</h3>
+    <div class="code-block"><code>const skills = useMemo(() => {
+  return ["React", "Node", "MongoDB"];
+}, []);</code></div>
+    <p>Useful when passing props to child components.</p>
+
+    <!-- 7️⃣ Difference: useMemo vs useCallback 🔥 -->
+    <h3>7️⃣ Difference: useMemo vs useCallback 🔥</h3>
+    <table>
+        <thead><tr><th>useMemo</th><th>useCallback</th></tr></thead>
+        <tbody>
+            <tr><td>Memoizes Value</td><td>Memoizes Function</td>
+            <tr><td>Returns Value</td><td>Returns Function</td>
+            <tr><td>Cache Calculation Result</td><td>Cache Function</td>
+            <tr><td><code>useMemo(() =&gt; value)</code></td><td><code>useCallback(() =&gt; {}, [])</code></td>
+        </tbody>
+    </table>
+    <p>Example:</p>
+    <div class="code-block"><code>const total = useMemo(() => count * 2, [count]);
+const handleClick = useCallback(() => {
+  console.log("Clicked");
+}, []);</code></div>
+
+    <!-- 8️⃣ Common Mistake -->
+    <h3>8️⃣ Common Mistake</h3>
+    <div class="wrong-box"><strong>❌ Wrong</strong><br/><code>const name = useMemo(() =&gt; "Gowtham", []);</code><br/>No heavy calculation.<br/>Not needed.</div>
+    <div class="correct-box"><strong>✅ Correct</strong><br/><code>const sortedData = useMemo(() =&gt; {
+  return data.sort();
+}, [data]);</code><br/>Heavy operation.</div>
+
+    <!-- 9️⃣ Interview Question -->
+    <h3>9️⃣ Interview Question</h3>
+    <p>Why not use useMemo everywhere?</p>
+    <p>Answer:</p>
+    <p>👉 useMemo itself has a small memory and comparison cost. Using it for simple calculations can reduce readability and may not improve performance. It should be used only for expensive computations.</p>
+
+    <!-- 🔟 Real Use Cases -->
+    <h3>🔟 Real Use Cases</h3>
+    <ul>
+        <li>Filtering large lists</li>
+        <li>Sorting large data</li>
+        <li>Expensive calculations</li>
+        <li>Derived state values</li>
+        <li>Object memoization</li>
+        <li>Array memoization</li>
+        <li>Optimizing child component renders</li>
+    </ul>
+
+    <!-- Final Checklist ✅ -->
+    <h2>Final Checklist ✅</h2>
+    <div class="checklist">
+        <p><strong>Your Notes Cover:</strong></p>
+        <p>Definition ✅<br/>Syntax ✅<br/>Basic Example ✅<br/>Dependency Array Basics ✅<br/>Real-Life Example ✅<br/>useMemo vs useEffect ✅<br/>When to Use ✅</p>
+        <p><strong>Add These:</strong></p>
+        <p>useMemo returns value 🔥<br/>Execution flow 🔥<br/>Object memoization 🔥<br/>Array memoization 🔥<br/>useMemo vs useCallback 🔥<br/>useMemo + React.memo 🔥<br/>Why not use useMemo everywhere 🔥<br/>Dependency importance 🔥</p>
+    </div>
+
+    <footer>📘 useMemo – FULL CONCEPT · every definition, example and missing concept preserved word‑for‑word. No JavaScript, pure HTML/CSS reference.</footer>
+</div>
+</body>
+</html>
