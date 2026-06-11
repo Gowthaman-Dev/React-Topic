@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Conditional Rendering – Short Concept | React</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #f0f4fa;
+            font-family: system-ui, 'Segoe UI', 'Roboto', 'Noto Sans', sans-serif;
+            line-height: 1.55;
+            padding: 2rem 1.2rem;
+            color: #0a2a38;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 2rem;
+            box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+            padding: 2rem 2rem 2.5rem 2rem;
+        }
+
+        @media (max-width: 700px) {
+            .container {
+                padding: 1.5rem;
+            }
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #1a5f7a, #2680a6);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            border-left: 6px solid #2c9bc2;
+            padding-left: 1.2rem;
+            margin-bottom: 1.2rem;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin: 1.8rem 0 0.75rem 0;
+            padding-bottom: 0.3rem;
+            border-bottom: 3px solid #cde0ec;
+            color: #155f7c;
+        }
+
+        h3 {
+            font-size: 1.45rem;
+            font-weight: 600;
+            margin: 1.3rem 0 0.6rem 0;
+            color: #20759b;
+        }
+
+        .card-note {
+            background: #f9fbfe;
+            border-left: 5px solid #2c8fbb;
+            padding: 1rem 1.2rem;
+            margin: 1rem 0;
+            border-radius: 1rem;
+        }
+
+        .code-block {
+            background: #1e2a32;
+            color: #eef4ff;
+            border-radius: 1rem;
+            padding: 1rem 1.2rem;
+            overflow-x: auto;
+            font-family: 'SF Mono', 'Fira Code', 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            line-height: 1.45;
+            margin: 1rem 0;
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
+
+        .inline-code {
+            background: #eef2f8;
+            font-family: monospace;
+            padding: 0.2rem 0.5rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            color: #0b4b6b;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.2rem 0;
+            background: white;
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+        }
+        th, td {
+            border: 1px solid #cbdde6;
+            padding: 0.8rem 1rem;
+            text-align: left;
+            vertical-align: top;
+        }
+        th {
+            background: #e3f0f7;
+            font-weight: 700;
+            color: #0f506f;
+        }
+
+        .wrong-box {
+            background: #fff4f0;
+            border-left: 4px solid #e15554;
+            padding: 0.8rem 1rem;
+            margin: 0.8rem 0;
+            border-radius: 0.8rem;
+        }
+        .correct-box {
+            background: #f0f9f0;
+            border-left: 4px solid #2e8b57;
+            padding: 0.8rem 1rem;
+            margin: 0.8rem 0;
+            border-radius: 0.8rem;
+        }
+
+        .highlight-memory {
+            background: #fff4e0;
+            padding: 1rem 1.5rem;
+            border-radius: 1.2rem;
+            margin: 1.2rem 0;
+            text-align: center;
+            font-weight: 700;
+            border: 1px solid #ffda99;
+        }
+
+        hr {
+            margin: 1.5rem 0;
+            border: none;
+            height: 2px;
+            background: linear-gradient(90deg, #cbe0ed, transparent);
+        }
+
+        footer {
+            margin-top: 2rem;
+            font-size: 0.7rem;
+            text-align: center;
+            color: #5a7f99;
+            border-top: 1px solid #e2edf5;
+            padding-top: 1.2rem;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Conditional Rendering – Short CONCEPT (React)</h1>
+
+    <!-- 1️⃣ Definition -->
+    <h2>1️⃣ Definition</h2>
+    <p>👉 Conditional Rendering is a technique in React used to display different UI elements based on a condition.</p>
+
+    <!-- 2️⃣ Simple Explanation -->
+    <h2>2️⃣ Simple Explanation</h2>
+    <p>👉 Tamil:</p>
+    <p>Condition true-aa irundha oru UI kaamikkanum, false-aa irundha vera UI kaamikkanum. Athukku Conditional Rendering use pannuvom.</p>
+    <p>👉 English:</p>
+    <p>Conditional Rendering allows React to show different UI based on a condition.</p>
+
+    <!-- 3.Why do we use Conditional Rendering? -->
+    <h2>3.Why do we use Conditional Rendering?</h2>
+    <p>We use Conditional Rendering when we want to show different content based on a condition.</p>
+    <p>Real-World Examples</p>
+    <ul>
+        <li>Is the user logged in?</li>
+        <li>Is the user an admin?</li>
+        <li>Has the data been loaded?</li>
+        <li>Are products available?</li>
+        <li>Has an error occurred?</li>
+    </ul>
+    <p>👉 In these situations, the UI should change based on the condition.</p>
+
+    <!-- 4.Methods of Conditional Rendering -->
+    <h2>4.Methods of Conditional Rendering</h2>
+    <p>React-la common-aa 5 methods use pannuvanga.</p>
+
+    <h3>🟢 1. if / else</h3>
+    <div class="code-block"><code>function App() {
+  const isLoggedIn = true;
+
+  if (isLoggedIn) {
+    return &lt;h1&gt;Welcome&lt;/h1&gt;;
+  } else {
+    return &lt;h1&gt;Login&lt;/h1&gt;;
+  }
+}</code></div>
+    <p>Use:</p>
+    <p>👉 Large conditions irundha</p>
+
+    <h3>🔵 2. Ternary Operator (Most Used 🔥)</h3>
+    <p>Syntax:</p>
+    <div class="code-block"><code>condition ? trueValue : falseValue</code></div>
+    <p>Example:</p>
+    <div class="code-block"><code>function App() {
+  const isLoggedIn = true;
+
+  return (
+    &lt;&gt;
+      {isLoggedIn ? &lt;h1&gt;Welcome&lt;/h1&gt; : &lt;h1&gt;Login&lt;/h1&gt;}
+    &lt;/&gt;
+  );
+}</code></div>
+    <p>Why use?</p>
+    <p>✔ Short code<br/>✔ Most common in projects</p>
+
+    <h3>🟣 3. Logical AND (&amp;&amp;)</h3>
+    <p>👉 Condition true-aa irundha mattum show pannum.</p>
+    <div class="code-block"><code>function App() {
+  const isLoggedIn = true;
+
+  return (
+    &lt;&gt;
+      {isLoggedIn && &lt;h1&gt;Welcome&lt;/h1&gt;}
+    &lt;/&gt;
+  );
+}</code></div>
+    <p>Output:</p>
+    <p>True → Welcome</p>
+    <p>False → Nothing</p>
+
+    <h3>🟠 4. Logical OR (||)</h3>
+    <p>👉 Default value show panna use pannuvanga.</p>
+    <div class="code-block"><code>function App() {
+  const userName = "";
+
+  return (
+    &lt;h1&gt;{userName || "Guest"}&lt;/h1&gt;
+  );
+}</code></div>
+    <p>Output:</p>
+    <p>Guest</p>
+
+    <h3>🔴 5. Switch Statement</h3>
+    <div class="code-block"><code>function App() {
+  const role = "admin";
+
+  switch (role) {
+    case "admin":
+      return &lt;h1&gt;Admin Panel&lt;/h1&gt;;
+    case "user":
+      return &lt;h1&gt;User Panel&lt;/h1&gt;;
+    default:
+      return &lt;h1&gt;Guest&lt;/h1&gt;;
+  }
+}</code></div>
+    <p>Use:</p>
+    <p>👉 Multiple conditions irundha</p>
+
+    <!-- 6.Nested Conditional Rendering -->
+    <h2>6.Nested Conditional Rendering</h2>
+    <div class="code-block"><code>{
+  isLoggedIn
+    ? isAdmin
+      ? &lt;AdminPanel /&gt;
+      : &lt;UserPanel /&gt;
+    : &lt;Login /&gt;
+}</code></div>
+    <p>⚠️ Avoid Too Much Nesting</p>
+    <p>Bad:</p>
+    <div class="code-block"><code>condition1
+ ? condition2
+ ? condition3
+ ? value1
+ : value2
+ : value3
+ : value4</code></div>
+    <p>👉 Hard to read</p>
+
+    <!-- 7.Best Practices -->
+    <h2>7.Best Practices</h2>
+    <ul>
+        <li>✅ Use ternary for simple conditions</li>
+        <li>✅ Use &amp;&amp; for show/hide UI</li>
+        <li>✅ Use switch for multiple cases</li>
+        <li>✅ Keep conditions readable</li>
+        <li>❌ Avoid deeply nested ternary operators</li>
+    </ul>
+
+    <!-- 8.Common Interview Questions -->
+    <h2>8.Common Interview Questions</h2>
+    <p><strong>Q1: What is Conditional Rendering?</strong><br/>👉 Conditional Rendering is the process of displaying different UI elements based on a condition.</p>
+    <p><strong>Q2: Which operator is mostly used?</strong><br/>👉 Ternary Operator (? :)</p>
+    <p><strong>Q3: What does &amp;&amp; do?</strong><br/>👉 Renders content only when the condition is true.</p>
+    <p><strong>Q4: What does || do?</strong><br/>👉 Provides a default value when the first value is falsy.</p>
+
+    <!-- 🧠 Memory Trick -->
+    <h2>🧠 Memory Trick</h2>
+    <div class="highlight-memory">👉 Conditional Rendering = Show UI based on a condition<br/>Methods: if / else, Ternary (? :), AND (&amp;&amp;), OR (||), Switch</div>
+
+    <!-- 🚀 Interview Answer (Perfect) -->
+    <h2>🚀 Interview Answer (Perfect)</h2>
+    <div class="card-note">👉 Conditional Rendering in React is a technique used to display different UI elements based on conditions. It helps show or hide content dynamically. Common methods include if/else statements, ternary operators, logical AND (&amp;&amp;), logical OR (||), and switch statements. The ternary operator is the most commonly used method in React applications.</div>
+
+    <!-- 💡 One-Line Summary -->
+    <h2>💡 One-Line Summary</h2>
+    <p>👉 Conditional Rendering allows React to display different UI based on conditions.</p>
+
+    <footer>📘 Conditional Rendering – Short Concept · every definition, example and explanation preserved word‑for‑word. No JavaScript, pure HTML/CSS reference.</footer>
+</div>
+</body>
+</html>
